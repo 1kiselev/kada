@@ -1,0 +1,65 @@
+[33mcommit f86e60c97ab07c6b4c8902c8a9624e2fd3279dec[m[33m ([m[1;36mHEAD -> [m[1;32mserver[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Kiselev Alexandr <yell7reserve@gmail.com>
+Date:   Tue Mar 7 21:24:02 2023 +0300
+
+    Create nest.js project
+
+[33mcommit ef9b41ee4fb0fd673eb6fe82a409eb4ac716712c[m
+Merge: ea328f5 b727af2
+Author: 1kiselev <110430922+1kiselev@users.noreply.github.com>
+Date:   Tue Mar 7 21:07:05 2023 +0300
+
+    Merge pull request #2 from 1kiselev/server
+    
+    Server
+
+[33mcommit b727af2e4638a694d90afaac95b7c0c812da1208[m[33m ([m[1;31morigin/server[m[33m)[m
+Author: Kiselev Alexandr <yell7reserve@gmail.com>
+Date:   Tue Mar 7 21:05:33 2023 +0300
+
+    Create nest.js project
+
+[33mcommit 014980abe6beeeff27f48ed1d6963cd64c1aea70[m
+Author: Kiselev Alexandr <yell7reserve@gmail.com>
+Date:   Tue Mar 7 20:56:50 2023 +0300
+
+    test commit
+
+[33mcommit f5f19128110cf90dbc6d61cf98bfb274aa3eb080[m
+Author: Kiselev Alexandr <yell7reserve@gmail.com>
+Date:   Tue Mar 7 20:53:33 2023 +0300
+
+    Delete submodule server
+
+[33mcommit ea328f500b3317181600ed3981e63d5414d61f3f[m
+Author: 1kiselev <110430922+1kiselev@users.noreply.github.com>
+Date:   Tue Mar 7 20:45:05 2023 +0300
+
+    Create client folder
+
+[33mcommit a83b3c1ef2ec9a8672dc67f3b80961f3a711d23b[m
+Author: Kiselev Alexandr <yell7reserve@gmail.com>
+Date:   Tue Mar 7 20:30:37 2023 +0300
+
+    Adding files into server folder
+
+[33mcommit e3dbf48aa6ed1e4c2ad38666ce61741aca27a31e[m
+Merge: 6a43bdc 205abfc
+Author: 1kiselev <110430922+1kiselev@users.noreply.github.com>
+Date:   Tue Mar 7 20:22:48 2023 +0300
+
+    Merge pull request #1 from 1kiselev/server
+    
+    Adding server folder
+
+[33mcommit 205abfc32ffe2a09b3d0269eef8fb50920964ee5[m
+Author: Kiselev Alexandr <yell7reserve@gmail.com>
+Date:   Tue Mar 7 20:19:50 2023 +0300
+
+    Adding server folder
+
+[33mcommit 6a43bdc0e4d2200555184d38e5f898151985f45f[m
+Author: 1kiselev <110430922+1kiselev@users.noreply.github.com>
+Date:   Tue Mar 7 18:18:54 2023 +0300
+
+    Initial commit
