@@ -13,7 +13,10 @@ export class AuthService {
 
     async login(userDto: CreateUserDto){
         const user = await this.validateUser(userDto)
-        return this.generateToken(user)
+        return {
+            token: this.generateToken(user),
+            username: user.username,
+        } 
     }
 
     async registration(userDto: CreateUserDto){
@@ -23,14 +26,14 @@ export class AuthService {
         }
         const hashPassword = await bcrypt.hash(userDto.password, 5);
         const user = await this.userService.createUser({...userDto, password: hashPassword})
-        return this.generateToken(user)
+        return {
+            token: this.generateToken(user)
+        }
     }
 
     async generateToken(user: User){
         const payload = { email: user.email, id: user.id, roles: user.roles } 
-        return {
-            token: this.jwtService.sign(payload)
-        }
+        return this.jwtService.sign(payload)
     }
 
     private async validateUser(userDto: CreateUserDto){
