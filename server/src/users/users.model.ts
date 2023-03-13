@@ -20,6 +20,9 @@ export class User extends Model<User, UserCreationAttrs> {
     @ApiProperty({example: '12345678', description: 'Пароль'})
     @Column({type: DataType.STRING, allowNull: false})
     password: string;
+    @ApiProperty({example: 'user1', description: 'Имя пользователя'})
+    @Column({type: DataType.STRING, allowNull: false})
+    username: string;
 
     @ApiProperty({example: 'true', description: 'Забанен или нет'})
     @Column({type: DataType.BOOLEAN, defaultValue: false})
