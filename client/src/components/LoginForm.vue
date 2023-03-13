@@ -82,9 +82,9 @@ export default {
         MyInput,
         MyLitButton,
     },
-    mixins: {
+    mixins: [
         validationMixin
-    },
+    ],
     data() {
         return {
             login: {

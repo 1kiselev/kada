@@ -11,6 +11,7 @@
 
         <h1 class="registr_header"> Введите ваше имя</h1>
         <my-input
+        v-model="userData.username"
         placeholder="Имя"
         style="
         margin-top: 7px;
@@ -22,6 +23,7 @@
         "
         > Введите ваш Email</h1>
         <my-input
+        v-model="userData.email"
         placeholder="Email "
         style="
         margin-top: 7px;
@@ -34,6 +36,7 @@
         > Введите ваш пароль</h1>
 
         <my-input
+        v-model="userData.password"
         placeholder="Пароль " 
         style="
         margin-top: 7px;
@@ -48,6 +51,7 @@
         > Введите ваш пароль ещё раз</h1>
 
         <my-input
+        
         placeholder="Пароль " 
         style="
         margin-top: 7px;
@@ -74,6 +78,8 @@
 
 
         <my-lit-button
+        :method="registrate"
+        :params="userData"
         style="
         margin-top: 53px;
         font-weight: 600;
@@ -91,12 +97,37 @@
 <script>
 import MyInput from './UI/MyInput.vue';
 import MyLitButton from './UI/MyLitButton.vue';
-
+import { mapMutations, mapActions } from 'vuex';
 
 export default {
+    data(){
+        return {
+            userData: {
+                username: '',
+                email: '',
+                password: '',
+            },
+            
+        }
+    },
     components: {
         MyInput,
         MyLitButton,
+    },
+
+    methods: {
+        ...mapMutations({
+            setUserData: 'main/setUserData',
+        }),
+        ...mapActions({
+            userRegistration: 'main/userRegistration',
+            userLogin: 'main/userLogin',
+        }),
+        registrate(data){
+            this.setUserData(data)
+            this.userRegistration()
+        }
+
     }
 }
 

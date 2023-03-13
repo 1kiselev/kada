@@ -1,12 +1,29 @@
 <template>
-    <button class="btn_lit">
+    <button 
+    @click="foo(method, params)"
+    class="btn_lit">
         <slot></slot>
     </button>
 </template>
 
 <script>
     export default {
-        name: 'my-lit-button'
+        name: 'my-lit-button',
+        props: {
+            method: {
+                type: Function,
+                required: true,
+            },
+            params: {
+                type: Object,
+                required: true,
+            }
+        },
+        methods: {
+            foo(method, params){
+                method(params)
+            }
+        }
     }
 </script>
 

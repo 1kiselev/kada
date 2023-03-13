@@ -9,11 +9,11 @@
 
 
 <script>
-import toogleMixin from '@/mixins/toogleMixin';
+import toggleMixin from '@/mixins/toggleMixin';
 
 export default {
     name: 'my-login',
-    mixins: [toogleMixin]
+    mixins: [toggleMixin]
 }
 </script>
 

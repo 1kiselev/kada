@@ -9,7 +9,7 @@
 
 
 <script>
-import toogleMixin from '@/mixins/toogleMixin';
+import toogleMixin from '@/mixins/toggleMixin';
 
 export default {
     name: 'my-registr',
