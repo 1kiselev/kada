@@ -9,13 +9,11 @@
             KADA
         </div>
 
-        <div class="navbar__btns">
-
-            <div class="my_groups_my_projects">
-                мои группы/проекты
-            </div>
-
             <div class="login_registr">
+
+                <div class="my_groups_my_projects">
+                Мои группы
+                </div>
 
                 <div class="login"
                 @click="showLogin"
@@ -26,11 +24,11 @@
                 <div class="registration"
                 @click="showRegistr"
                 >
-                    Зарегистрироваться 
+                    Создать аккаунт 
                 </div>
             </div>
 
-        </div>
+        
 
         <my-login v-model:show="LoginVisible">
             <login-form/>
@@ -69,6 +67,8 @@ export default {
     methods: {
         showLogin() {
             this.LoginVisible = true;
+            console.log('дошёл до этого момента')
+
         },
         showRegistr() {
             this.RegistrVisible = true;
@@ -85,48 +85,30 @@ export default {
 
 .navbar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     height: 100px;
-
-    padding-left: 244px;
-    padding-right: 100px;
+    width: 1366px;
 }
 
 .kada {
-    width: 200px;
-    height: 77.81px;
     font-family: 'Advent Pro';
     font-style: normal;
-    font-weight: 400;
-    font-size: 64px;
-    line-height: 77px;
+    font-size: 50px;
     text-align: center;
     color: #FFFFFF;
     mix-blend-mode: normal;
-
-
 }
 
-.navbar__btns {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 750px;
-    height: 56px;
-    top: 50px;
-    margin-right: 50px;
-}
 .login_registr {
     display: flex;
+    font-size: 20px;
 }
 .login {
-    height: 33px;
-    margin-left: 10px;
+    margin-left: 60px;
     font-family: 'Advent Pro';
     font-style: normal;
     font-weight: 400;
-    font-size: 28px;
     line-height: 33px;
     text-align: center;
     color: #FFFFFF;
@@ -139,33 +121,29 @@ export default {
 }
 
 .registration {
-    height: 33px;
     margin-left: 20px;
     font-family: 'Advent Pro';
     font-style: normal;
     font-weight: 400;
-    font-size: 28px;
     line-height: 33px;
     text-align: center;
     color: #FFFFFF;
     cursor: pointer;
-    transition: color 0.3s;
+    transition:  0.3s;
+    background-color: rgb(70, 70, 70);
+    width: 150px;
+    border-radius: 8px;
 }
 
 .registration:hover {
-    color: #bbbbbb;
+    background: rgb(34, 34, 34);
 }
 
 .my_groups_my_projects {
-    height: 27.28px;
     font-family: 'Advent Pro';
     font-style: normal;
-    font-weight: 400;
-    font-size: 28px;
-    line-height: 29px;
     display: flex;
     align-items: center;
-    text-align: center;
     color: #FFFFFF;
     cursor: pointer;
     transition: color 0.3s;
@@ -174,6 +152,5 @@ export default {
 .my_groups_my_projects:hover {
     color: #bbbbbb;
 } 
-
 
 </style>

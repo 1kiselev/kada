@@ -44,29 +44,24 @@
                 </div>
 
                 <div class="one_block">
+                    
                     <div class="name">
                         <div class="little_h"> Название группы</div>
 
-                        <my-input
-                        style="
-                        width: 238px;
-                        height: 37px;
-                        margin-bottom: 10px;
-                        font-size: 15px;
-                        "
-                        ></my-input>
+                       <my-create-input  
+                       @blur="v$.name_of_group.$touch()"
+                        v-model="state.create.name_of_group"
+                       ></my-create-input>
+                        <span v-if="v$.name_of_group.$error" style="color:red; display: flex">
+                            {{ 'Это обязательное поле!' }}
+                        </span>
+
                     </div>
+
 
                     <div class="link">
                         <div class="little_h"> Ссылка для приглашения </div>
-                        <my-input
-                        style="
-                        width: 238px;
-                        height: 37px;
-                        font-size: 15px;
-
-                        "
-                        ></my-input>
+                        <my-create-input>  </my-create-input>
                     </div>
                 </div>
                 
@@ -76,29 +71,21 @@
                     </div>
 
                     <textarea
-                    class="text_desc"
-                    style="
-                    width: 255px;
-                    height: 116px;
-                    border-radius: 8px;
-                    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-                    padding-left: 10px;
-                    padding-top: 5px;
-                    font-size: 15px;
-                    opacity: 0.7;
-                    "
-                    >
-
-                    </textarea>
+                    v-model="state.create.description_of_group"
+                    class="text_desc"></textarea>
                 </div>
         </div>
 
 
         </div>
 
-        <my-lit-button>
+        <button
+        class="button__create"
+        @click="$router.push('/working_group') "
+
+        >
             Создать
-        </my-lit-button>
+        </button>
 
 
 
@@ -111,14 +98,41 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import MyLitButton from "@/components/UI/MyLitButton.vue";
-import MyInput from "@/components/UI/MyInput.vue";
+import MyCreateInput from "@/components/UI/MyCreateInput.vue";
+import { reactive } from 'vue';
+import { useVuelidate } from '@vuelidate/core'
+import { required } from '@vuelidate/validators'
+
 
 export default {
     components: {
         NavBar,
         MyLitButton,
-        MyInput,
+        MyCreateInput
+    },
+    setup() {
+        const state = reactive ({
+            create: {
+                avatar: '',
+                name_of_group: '',
+                link_group: '',
+                description_of_group: ''
+            }
+        })
+
+        const rules = {
+            name_of_group: { required}
+        }
+
+        const v$ = useVuelidate(rules, state)
+
+        return {
+            state,
+            v$
+        }
     }
+
+
 }
 </script>
 
@@ -128,7 +142,8 @@ export default {
 
 .fon1 {
     height: 100vh;
-    width: 100%;
+    min-width: 100%;
+    width: 1900px;
     color: white;
     display: flex;
     flex-direction: column;
@@ -140,6 +155,9 @@ export default {
 .navbar_create{
     height: 100px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: black;
 }
 
@@ -165,6 +183,10 @@ export default {
     margin-bottom: 39px;
 }
 
+.name {
+    display: block;
+    margin-bottom: 10px;
+}
 
 .block {
     width: 151.25px;
@@ -220,5 +242,38 @@ export default {
 }
 .little_h {
     margin-bottom: 5px;
+}
+
+.button__create{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    
+    width: 127.98px;
+    height: 43px;
+    font-size: 18px;
+    background: #000000;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    transition: 0.3s;
+    cursor: pointer;
+    color: white;
+}
+
+.button__create:hover {
+    background: rgb(34, 34, 34);
+}
+
+.text_desc {
+
+    width: 255px;
+    height: 116px;
+    border-radius: 8px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-left: 10px;
+    padding-top: 5px;
+    font-size: 15px;
+    opacity: 0.7;
 }
 </style>

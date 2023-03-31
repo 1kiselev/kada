@@ -8,6 +8,16 @@ export const mainStore = {
             username: '',
         },
         token: '',
+        subgroup: {
+            name: '',
+            members: [],
+            task: '',
+        },
+        group: {
+            name: '',
+            description: '',
+            members: []
+        }
 
     }),
 

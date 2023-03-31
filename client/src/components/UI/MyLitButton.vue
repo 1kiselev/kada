@@ -1,6 +1,6 @@
 <template>
     <button 
-    @click="foo(method, params)"
+    @click="foo(method, params)" 
     class="btn_lit">
         <slot></slot>
     </button>

@@ -32,9 +32,8 @@ export default {
 
 .registr__content {
     border: 1px white solid;
-    margin: 200px auto;
+    margin: 100px auto;
     width: 454px;
-    height: 688px;
     border-radius: 8px;
     background-color: rgba(17, 17, 17, 1);
 }

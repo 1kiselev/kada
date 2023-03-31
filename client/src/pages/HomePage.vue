@@ -2,10 +2,12 @@
     <div class="fon">
 
         <div class="img_team" >
-            <nav-bar></nav-bar>
+            <nav-bar>
+                
+            </nav-bar>
             <div class="header_img"> 
-                <h1 class="teamwork">Командная работа лучше вместе с KADA</h1>
-                <h2 class="be_more">будьте более продуктивны с нами!</h2>
+                <h1 class="teamwork">Командная работа лучше вместе с  KADA </h1>
+                <h2 class="be_more">Будьте более продуктивны с нами!</h2>
             </div>
         </div>
 
@@ -119,7 +121,9 @@ export default {
 /* imt _team  */
 
 .img_team {
-    width: 1900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     height: 432px;
     left: 0px;
     top: 0px;
@@ -139,7 +143,6 @@ export default {
     height: 84px;
     font-family: 'Advent Pro';
     font-style: normal;
-    font-weight: 400;
     font-size: 60px;
     text-align: center;
     color: #FFFFFF;
@@ -150,9 +153,7 @@ export default {
     height: 86px;
     font-family: 'Advent Pro';
     font-style: normal;
-    font-weight: 400;
     font-size: 50px;
-    line-height: 77px;
     text-align: center;
     color: #ffffff;
 }

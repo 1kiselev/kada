@@ -1,6 +1,9 @@
 <template>
-    <div class="registr_window">
-        <div class="title_registr"
+
+<form @submit.prevent="submitForm" novalidate> 
+    <div class="registr__window">
+
+        <div class="registr__tittle"
             style="font-size: 28px;
             font-weight: 600;
             margin-bottom: 50px;
@@ -9,56 +12,81 @@
                 Регистрация
         </div>
 
-        <h1 class="registr_header"> Введите ваше имя</h1>
+        <h1 class="registr__header"> Введите ваше имя</h1>
         <my-input
-        v-model="userData.username"
-        placeholder="Имя"
-        style="
-        margin-top: 7px;
-        "
+            @blur="v$.username.$touch()"
+            v-model="state.userData.username"
+            placeholder="Имя"
+            style="
+            margin-top: 7px;
+            "
         />
-        <h1 class="registr_header"
+        <span class="span__error" v-if="v$.username.$error"
+            style="color:red"
+            >
+            {{ 'Пожалуйста, введите ваше имя'}}
+        </span>
+        <h1 class="registr__header"
         style="
         margin-top: 21px;
         "
         > Введите ваш Email</h1>
         <my-input
-        v-model="userData.email"
+        @blur="v$.email.$touch()"
+        v-model="state.userData.email"
         placeholder="Email "
         style="
         margin-top: 7px;
         "
         />
-        <h1 class="registr_header"
-        style="
-        margin-top: 21px;
-        "
+        <span class="span__error" v-if="v$.email.$error"
+            style="color:red"
+            >
+                {{ 'Пожалуйста, введите коректно ваш email'}}
+        </span>
+        <h1 class="registr__header"
+            style="
+            margin-top: 21px;
+            "
         > Введите ваш пароль</h1>
 
         <my-input
-        v-model="userData.password"
-        placeholder="Пароль " 
-        style="
-        margin-top: 7px;
-        "
-        type="password"
+            @focus="v$.password.$touch()"
+            v-model="state.userData.password"
+            placeholder="Пароль " 
+            style="
+            margin-top: 7px;
+            "
+            type="password"
         />
+        <span  class="span__error" v-if="v$.password.$error"
+        style="color:red"
+        >
+            {{ 'Пожалуйста, придумайте пароль (минимум 6 символо)'}}
+        </span>
 
-        <h1 class="registr_header"
-        style="
-        margin-top: 21px;
-        "
+        <h1 class="registr__header"
+         style="
+            margin-top: 21px;
+            "
         > Введите ваш пароль ещё раз</h1>
 
         <my-input
-        
-        placeholder="Пароль " 
+        @blur="v$.confirm.$touch()"
+        v-model="state.userData.confirm"
+        placeholder="Повторите пароль " 
         style="
         margin-top: 7px;
         "
         type="password"
-
         />
+
+        <span class="span__error" v-if="v$.confirm.$error"
+        style="color:red"
+        >
+            {{ 'Это поле должно совпдаать с  вашим поролем!' }}
+        </span>
+    
 
         <div class="no_account">
 
@@ -76,20 +104,22 @@
             </h3>
         </div>
 
-
         <my-lit-button
-        :method="registrate"
-        :params="userData"
-        style="
-        margin-top: 53px;
-        font-weight: 600;
-        font-size: 20px;
-        "
+            type="submit"
+            :method="submitForm"
+            :params="userData"
+            style="
+            margin-top: 53px;
+            font-weight: 600;
+            font-size: 20px;
+            width: 400px;
+            "
         > 
             Принять
         </my-lit-button>
-    
     </div>
+
+    </form>
 </template>
 
 
@@ -98,16 +128,32 @@
 import MyInput from './UI/MyInput.vue';
 import MyLitButton from './UI/MyLitButton.vue';
 import { mapMutations, mapActions } from 'vuex';
+import { useVuelidate } from '@vuelidate/core'
+import { required, email, minLength, sameAs } from '@vuelidate/validators';
+import { reactive } from 'vue';
 
 export default {
-    data(){
-        return {
+    setup() {
+        const state = reactive ({
             userData: {
                 username: '',
                 email: '',
                 password: '',
-            },
-            
+                confirm: '',
+        }})
+
+        const rules =  {
+                username: {required},
+                email: {required, email},
+                password: {required, minLength: minLength(6)},
+                confirm: {required, sameAs: sameAs(state.userData.password)}
+        }
+
+        const v$ = useVuelidate(rules, state)
+
+        return  {
+            v$,
+            state,
         }
     },
     components: {
@@ -126,7 +172,10 @@ export default {
         registrate(data){
             this.setUserData(data)
             this.userRegistration()
-        }
+        },
+        submitForm() {
+            this.v$.$validate()
+        },
 
     }
 }
@@ -136,36 +185,35 @@ export default {
 
 
 <style>
-
-
-
-.registr_window {
+.registr__window {
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 53px;
     padding-bottom: 53px;
+    
 }
 
-.registr_header {
-    /* Etner your UserName */
-width: 373px;
-left: calc(50% - 137px/2 - 119.5px);
+.registr__header {
+    width: 373px;
+    left: calc(50% - 137px/2 - 119.5px);
 
-font-family: 'Advent Pro';
-font-style: normal;
-font-weight: 700;
-font-size: 16px;
-line-height: 19px;
-display: flex;
-align-items: center;
-text-align: center;
-
-color: #FFFFFF;
-
-
+    font-family: 'Advent Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
 }
-
+.span__error {
+    position: relative;
+    text-align: left;
+    width: 100%;
+    left: 40px;
+}
 </style>
 

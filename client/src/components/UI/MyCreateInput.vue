@@ -1,6 +1,6 @@
 <template>
     <div class="form__login">
-        <input :value="modelValue" @input="updateInput" class="input" type="text">
+        <input :value="modelValue" @input="updateInput" class="input__create" type="text">
     </div>
 </template>
 
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-    name: 'my-input-create',
+    name: 'my-input',
     props: {
         modelValue: [String, Number],
     },
@@ -27,22 +27,19 @@ export default {
 
 <style>
 
-.input {
-    width: 375px;
-    height: 49px;
-    background: transparent;
+.input__create {
+    width: 238px;
+    height: 37px;
+    background: #D9D9D9;
     outline: none;
     border: none;
     border-bottom: 2px solid gray;
-    font-size: 20px;
+    font-size: 15px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     padding-left: 10px;
     transition: 0.4s;
-    color: white;
-}
-
-.input:focus {
-    border-bottom: 2px solid white;
+    color: rgb(0, 0, 0);
+    border-radius: 8px;
 }
 
 ::placeholder {
