@@ -12,7 +12,14 @@ import { AuthModule } from './auth/auth.module';
 // import { Post } from "./posts/posts.model";
 // import { FilesModule } from './files/files.module';
 // import { ServeStaticModule } from "@nestjs/serve-static";
+import { GroupsModule } from './groups/groups.module';
+import { SubgroupsModule } from './groups/subgroups/subgroups.module';
 import * as path from 'path'
+import { Group } from "./groups/groups.model";
+import { Subgroup } from "./groups/subgroups/subgroups.model";
+import { UserGroup } from "./groups/users-group/users-group.model";
+import { UserSubgroup } from "./groups/subgroups/users-group-subgroups.model";
+import { UserGroupRoles } from "./roles/user-group-roles.model";
 
 @Module({
     controllers: [],
@@ -31,12 +38,14 @@ import * as path from 'path'
           username: process.env.POSTGRES_USER,
           password: process.env.POSTGRESS_PASSWORD,
           database: process.env.POSTGRES_DB,
-          models: [User, Role, UserRoles],
+          models: [User, Role, UserRoles, Group, Subgroup, UserGroup, UserGroupRoles,UserSubgroup],
           autoLoadModels: true,
         }),
         UsersModule,
         RolesModule,
         AuthModule,
+        GroupsModule,
+        SubgroupsModule,
       ],
 })
 export class AppModule {}

@@ -23,27 +23,36 @@ export class UsersController {
         return this.usersService.createUser(userDto);
     }
 
+    // @ApiOperation({summary: 'Получить пользователя по ID'})
+    // @ApiResponse({status: 200, type: [User]})
+    // // @Roles("ADMIN")
+    // @UseGuards(RolesGuard)
+    // @Get('/byId')
+    // getUserById(user_id) {
+    //     return this.usersService.getAllUsers();
+    // }
+
     @ApiOperation({summary: 'Получить всех пользователей'})
     @ApiResponse({status: 200, type: [User]})
-    @Roles("ADMIN")
+    // @Roles("ADMIN")
     @UseGuards(RolesGuard)
     @Get()
     getAll() {
         return this.usersService.getAllUsers();
     }
 
-    @ApiOperation({summary: 'Выдать роль'})
-    @ApiResponse({status: 200})
-    @Roles("ADMIN")
-    @UseGuards(RolesGuard)
-    @Post('/role')
-    addRole(@Body() dto: AddRoleDto) {
-        return this.usersService.addRole(dto);
-    }
+    // @ApiOperation({summary: 'Выдать роль'})
+    // @ApiResponse({status: 200})
+    // // @Roles("ADMIN")
+    // @UseGuards(RolesGuard)
+    // @Post('/role')
+    // addRole(@Body() dto: AddRoleDto) {
+    //     return this.usersService.addRole(dto);
+    // }
 
     @ApiOperation({summary: 'Забанить пользователя'})
     @ApiResponse({status: 200})
-    @Roles("ADMIN")
+    // @Roles("ADMIN")
     @UseGuards(RolesGuard)
     @Post('/ban')
     ban(@Body() dto: BanUserDto) {
