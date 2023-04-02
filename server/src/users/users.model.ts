@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger/dist/decorators";
 import { BelongsToMany, Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { UserGroup } from "src/groups/users-group/users-group.model";
 // import { Post } from "src/posts/posts.model";
 import { Role } from "src/roles/roles.model";
 import { UserRoles } from "src/roles/user-roles.model";
@@ -31,6 +32,9 @@ export class User extends Model<User, UserCreationAttrs> {
     @ApiProperty({example: 'За хулиганство', description: 'Причина блокировки'})
     @Column({type: DataType.STRING, allowNull: true})
     banReason: string;
+
+    @HasMany(() => UserGroup)
+    usersGroup: UserGroup[];
 
     @BelongsToMany(() => Role, () => UserRoles)
     roles: Role[];
