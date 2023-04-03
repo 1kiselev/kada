@@ -4,10 +4,7 @@
     <div class="registr__window">
 
         <div class="registr__tittle"
-            style="font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 50px;
-            "
+            style="font-size: 28px;font-weight: 600;margin-bottom: 50px;"
         >
                 Регистрация
         </div>
@@ -17,46 +14,44 @@
             @blur="v$.username.$touch()"
             v-model="state.userData.username"
             placeholder="Имя"
-            style="
-            margin-top: 7px;
-            "
+            type="text"
+            style="margin-top: 7px;"
         />
         <span class="span__error" v-if="v$.username.$error"
             style="color:red"
-            >
+        >
             {{ 'Пожалуйста, введите ваше имя'}}
         </span>
+
+
         <h1 class="registr__header"
-        style="
-        margin-top: 21px;
-        "
+        style="margin-top: 21px;"
         > Введите ваш Email</h1>
+        
         <my-input
-        @blur="v$.email.$touch()"
-        v-model="state.userData.email"
-        placeholder="Email "
-        style="
-        margin-top: 7px;
-        "
+            @blur="v$.email.$touch()"
+            v-model="state.userData.email"
+            placeholder="Email "
+            type="email"
+            style="margin-top: 7px"
         />
         <span class="span__error" v-if="v$.email.$error"
             style="color:red"
             >
                 {{ 'Пожалуйста, введите коректно ваш email'}}
         </span>
+
+        
         <h1 class="registr__header"
-            style="
-            margin-top: 21px;
-            "
+            style="margin-top: 21px;"
         > Введите ваш пароль</h1>
 
-        <my-input
-            @focus="v$.password.$touch()"
+        <input
+            class="input__password"
+            @blur="v$.password.$touch()"
             v-model="state.userData.password"
             placeholder="Пароль " 
-            style="
-            margin-top: 7px;
-            "
+            style="margin-top: 7px"
             type="password"
         />
         <span  class="span__error" v-if="v$.password.$error"
@@ -65,20 +60,18 @@
             {{ 'Пожалуйста, придумайте пароль (минимум 6 символо)'}}
         </span>
 
+
         <h1 class="registr__header"
-         style="
-            margin-top: 21px;
-            "
+         style="margin-top: 21px;"
         > Введите ваш пароль ещё раз</h1>
 
-        <my-input
-        @blur="v$.confirm.$touch()"
-        v-model="state.userData.confirm"
-        placeholder="Повторите пароль " 
-        style="
-        margin-top: 7px;
-        "
-        type="password"
+        <input
+            class="input__password"
+            @blur="v$.confirm.$touch()"
+            v-model="state.userData.confirm"
+            placeholder="Повторите пароль " 
+            style="margin-top: 7px;"
+            type="password"
         />
 
         <span class="span__error" v-if="v$.confirm.$error"
@@ -95,10 +88,7 @@
             </h3>
 
             <h3 class="create_acc"
-            style="
-            margin-left: 40px;
-            cursor: pointer;
-            "
+            style="margin-left: 40px;cursor: pointer;"
             >
                 Войти
             </h3>
@@ -106,14 +96,9 @@
 
         <my-lit-button
             type="submit"
-            :method="submitForm"
-            :params="userData"
-            style="
-            margin-top: 53px;
-            font-weight: 600;
-            font-size: 20px;
-            width: 400px;
-            "
+            :method="registrate"
+            :params="state.userData"
+            @click="registrate(state.userData)"
         > 
             Принять
         </my-lit-button>
@@ -147,13 +132,13 @@ export default {
                 email: {required, email},
                 password: {required, minLength: minLength(6)},
                 confirm: {required, sameAs: sameAs(state.userData.password)}
-        }
+            }
 
         const v$ = useVuelidate(rules, state)
 
         return  {
             v$,
-            state,
+            state
         }
     },
     components: {
@@ -169,17 +154,17 @@ export default {
             userRegistration: 'main/userRegistration',
             userLogin: 'main/userLogin',
         }),
-        registrate(data){
-            this.setUserData(data)
-            this.userRegistration()
-        },
         submitForm() {
             this.v$.$validate()
+        },
+        registrate(data){
+            this.submitForm()
+            this.setUserData(data)
+            this.userRegistration()
         },
 
     }
 }
-
 </script>
 
 
@@ -214,6 +199,29 @@ export default {
     text-align: left;
     width: 100%;
     left: 40px;
+}
+
+.input__password {
+    width: 375px;
+    height: 49px;
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid gray;
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-left: 10px;
+    transition: 0.4s;
+    color: white;
+}
+
+.input__password:focus {
+    border-bottom: 2px solid white;
+}
+
+::placeholder {
+    font-size: 16px;
+    opacity: 0.5;
 }
 </style>
 
