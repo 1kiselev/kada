@@ -4,6 +4,7 @@ import { RolesService } from 'src/roles/roles.service';
 import { AddRoleDto } from 'src/users/dto/add-role.dto';
 import { User } from 'src/users/users.model';
 import { UsersService } from 'src/users/users.service';
+import { StringDecoder } from 'string_decoder';
 import { AddUserDto } from './dto/add-user.dto';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { Group } from './groups.model';
@@ -49,7 +50,7 @@ export class GroupsService {
             const userGroup = await this.userGroupService.createUserGroup({ user_id, group_id})
             const user_group_id = userGroup.id
             this.addRole({ value, user_group_id })
-            return dto;
+            return this.getGroupUsers(dto.group_id);
         }
         throw new HttpException('Пользователь или группа не найдены', HttpStatus.NOT_FOUND);
     }
@@ -68,15 +69,41 @@ export class GroupsService {
         return await this.groupRepository.findByPk(id);
     }
 
+    parseUsers(users){
+        let result = {
+            count: users.count,
+            rows: []
+        }
+        users.rows.forEach(element => {
+            result.rows.push(
+                {
+                    username: element.username,
+                    email: element.email,
+                }
+            )
+        });
+        return result
+    }
+
     async getGroupUsers(group_id: number){
         let user_ids: Array<UserGroup> = await this.userGroupRepository.findAll({ where: {groupId: group_id} })
         let users: {rows: User[]; count: number } = await this.userService.getUsersByIds(
             user_ids.map(user_group => user_group.userId)
-            )
-        return users
+        )
+        return this.parseUsers(users)
     }
 
-    async getInfo(id){
-        
+    async getInfo(group_id){
+        let info = {
+            name: '',
+            description: '',
+            members: { count: Number, rows: [] }
+        }
+        const group = await this.groupRepository.findByPk(group_id);
+        console.log(group)
+        info.name = group.name;
+        info.description = group.info;
+        info.members = await this.getGroupUsers(group_id)
+        return info
     }
 }

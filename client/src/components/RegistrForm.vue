@@ -169,12 +169,13 @@ export default {
             userRegistration: 'main/userRegistration',
             userLogin: 'main/userLogin',
         }),
-        registrate(data){
-            this.setUserData(data)
-            this.userRegistration()
-        },
         submitForm() {
             this.v$.$validate()
+        },
+        registrate(data){
+            this.submitForm()
+            this.setUserData(data)
+            this.userRegistration()
         },
 
     }

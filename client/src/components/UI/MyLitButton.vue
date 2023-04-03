@@ -18,6 +18,7 @@
                 type: Object,
                 required: true,
             }
+         
         },
         methods: {
             foo(method, params){
