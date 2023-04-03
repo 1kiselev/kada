@@ -37,7 +37,6 @@
     align-items: center;
     box-sizing: border-box;
     
-    width: 127.98px;
     height: 43px;
     
     background: #000000;
@@ -46,6 +45,11 @@
     transition: 0.3s;
     cursor: pointer;
     color: white;
+    
+    margin-top: 53px;
+    font-weight: 600;
+    font-size: 20px;
+    width: 400px;
 }
 
 .btn_lit:hover {

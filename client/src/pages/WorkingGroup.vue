@@ -74,21 +74,20 @@ export default {
     setup() {
 
     const state = reactive ({
-        subgroup: {
+        subgroupData: {
             name: '',
             members: [],
             task: '',
         },
-        group: {
+        groupData: {
             name: '',
             description: '',
-            task: '',
             members: []
         }
     })
 
 
-    return { state}
+    return {state}
     }   
 
 

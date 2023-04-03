@@ -25,9 +25,14 @@ export const mainStore = {
         getUsername(state){
             return state.user.username
         },
-
         getUserData(state){
             return state.user
+        },
+        getGroupData(state) {
+            return state.group
+        },
+        getSubGroupData(state) {
+            return state.subgroup
         }
     },
 
@@ -37,7 +42,6 @@ export const mainStore = {
             state.user.password = userData.password
             state.user.username = userData.username
         },
-
         setToken(state, token){
             state.token = token
         },
@@ -48,6 +52,16 @@ export const mainStore = {
         setUserName(state, username){
             state.user.username = username
         },
+        setGroupData(state, groupData) {
+            state.group.name = groupData.name
+            state.group.description = groupData.description
+            state.group.members = groupData.members
+        },
+        setSubGroupData(state, subgroupData) {
+            state.subgroup.name = subgroupData.name
+            state.subgroup.members = subgroupData.members
+            state.subgroup.task = subgroupData.task
+        }
         
     },
 
