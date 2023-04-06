@@ -95,7 +95,7 @@
             type="submit"
             :method="registrate"
             :params="state.userData"
-            @click="registrate"
+            
         > 
             Принять
         </my-lit-button>
@@ -142,11 +142,11 @@ export default {
         MyInput,
         MyLitButton,
     },
-    mounted: {
-        ...mapGetters({
-            getUsername: 'main/getUsername'
-        })
-    },
+    // mounted: {
+    //     ...mapGetters({
+    //         getUsername: 'main/getUsername'
+    //     })
+    // },
     methods: {
         ...mapMutations({
             setUserData: 'main/setUserData',

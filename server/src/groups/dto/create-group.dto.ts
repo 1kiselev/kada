@@ -5,6 +5,6 @@ export class CreateGroupDto {
     readonly name: string;
     @ApiProperty({example: 'This group is working on a study project', description: 'Описание группы'})
     readonly description: string;
-    @ApiProperty({example: '2', description: 'id пользователя, создающего группу'})
-    readonly creator_id: number;
+    @ApiProperty({example: 'creator@mail.com', description: 'email пользователя, создающего группу'})
+    readonly creator: string;
 }

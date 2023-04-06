@@ -3,9 +3,8 @@ import axios from "axios"
 export const mainStore = {
     state: () => ({
         user: {
-            email: '',
-            password: '',
-            username: '',
+            email: 'alex1@mail.com',
+            username: 'alex1',
         },
         token: '',
         subgroup: {
@@ -39,7 +38,6 @@ export const mainStore = {
     mutations: {
         setUserData(state, userData){
             state.user.email = userData.email
-            state.user.password = userData.password
             state.user.username = userData.username
         },
         setToken(state, token){
@@ -49,14 +47,17 @@ export const mainStore = {
             state.user.email = data.email
             state.user.password = data.password
         },
-        setUserName(state, username){
+        setUsername(state, username){
             state.user.username = username
         },
         setGroupData(state, groupData) {
             state.group.name = groupData.name
             state.group.description = groupData.description
-            state.group.members = groupData.members
         },
+        setGroupMembers(state, members){
+            state.group.members = members
+        },
+
         setSubGroupData(state, subgroupData) {
             state.subgroup.name = subgroupData.name
             state.subgroup.members = subgroupData.members
@@ -73,21 +74,21 @@ export const mainStore = {
                     password: state.user.password,
                     username: state.user.username
                 })
+                console.log(response)
                 commit('setToken', response.token)
             } catch (error) {
                 console.log(error)
             }
         },
 
-        async userLogin({state, commit}){
+        async userLogin({state, commit}, data){
             try {
                 const response = await axios.post('http://localhost:5000/auth/login', {
-                    email: state.user.email,
-                    password: state.user.password,
+                    email: data.email,
+                    password: data.password,
                 })
-                commit('setToken', response.token)
-                commit('setUsername', response.username)
-                console.log("Успешно")
+                commit('setUserData', { email: data.email, username: response.data.username })
+                commit('setToken', response.data.token)
             } catch (error) {
                 console.log(error)
             }
@@ -95,12 +96,14 @@ export const mainStore = {
 
         async createGroup({state, commit}) {
             try {
-                const response = await axios.post('http://localhost:5000/create/group', {
+                const response = await axios.post('http://localhost:5000/groups', {
                     name: state.group.name,
                     description: state.group.description,
-                    meembers: state.group.members
+                    creator: state.user.email
                 })
-                commit('setGroupData', response.groupData.name)
+                console.log(response.data)
+                commit('setGroupData', response.data.group)
+                commit('setGroupMembers', response.data.members)
                 console.log('Успешно')
             } catch (error) {
                 console.log(error)

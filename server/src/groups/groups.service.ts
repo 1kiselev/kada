@@ -11,6 +11,7 @@ import { Group } from './groups.model';
 import { CreateUserGroupDto } from './users-group/dto/create-user-group.dto';
 import { UserGroup } from './users-group/users-group.model';
 import { UsersGroupService } from './users-group/users-group.service';
+import { response } from 'express';
 
 @Injectable()
 export class GroupsService {
@@ -29,13 +30,15 @@ export class GroupsService {
         const name: string = dto.name;
         const description: string = dto.description;
         const group = await this.groupRepository.create({name, description});
-        const user_id = dto.creator_id; 
+        const user_email = dto.creator; 
         const group_id = group.id;
-        const userGroup: UserGroup = await this.userGroupService.createUserGroup({ user_id, group_id })
+        const userGroup: UserGroup = await this.userGroupService.createUserGroup({ user_email, group_id })
         const value: string = 'CREATOR'
         const user_group_id = userGroup.id
-        this.addRole({ value, user_group_id })
-        return group;
+        await this.addRole({ value, user_group_id })
+        const response = { group: group, members: await this.getGroupUsers(group_id)}
+        // console.log(response)
+        return response;
     }
 
 
@@ -44,10 +47,10 @@ export class GroupsService {
         const user = await this.userService.getUserByEmail(dto.user_email);
         const group = await this.groupRepository.findByPk(dto.group_id);
         if ( user && group ) {
-            const user_id = user.id;
+            const user_email = user.email;
             const group_id = group.id;
             const value = "MEMBER"
-            const userGroup = await this.userGroupService.createUserGroup({ user_id, group_id})
+            const userGroup = await this.userGroupService.createUserGroup({ user_email, group_id})
             const user_group_id = userGroup.id
             this.addRole({ value, user_group_id })
             return this.getGroupUsers(dto.group_id);
@@ -90,6 +93,7 @@ export class GroupsService {
         let users: {rows: User[]; count: number } = await this.userService.getUsersByIds(
             user_ids.map(user_group => user_group.userId)
         )
+        console.log(users)
         return this.parseUsers(users)
     }
 
