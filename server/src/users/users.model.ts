@@ -8,6 +8,7 @@ import { UserRoles } from "src/roles/user-roles.model";
 interface UserCreationAttrs {
     email: string;
     password: string;
+    username: string;
 }
 
 @Table({tableName: 'users'})

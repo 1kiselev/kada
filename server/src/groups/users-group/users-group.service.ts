@@ -20,7 +20,7 @@ export class UsersGroupService {
 
     async createUserGroup(dto: CreateUserGroupDto){
         const userGroup = await this.userGroupRepository.create(dto);
-        const user = await this.userService.getUserById(dto.user_id);
+        const user = await this.userService.getUserByEmail(dto.user_email);
         const group = await this.groupService.getGroupById(dto.group_id);
         user.$add('usersGroup', [userGroup.id]);
         group.$add('usersGroup', [userGroup.id]);

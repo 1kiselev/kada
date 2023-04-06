@@ -87,11 +87,11 @@ export default {
             setGroupData: 'main/setGroupData'
         })
     },
-    mounted: {
-        ...mapGetters({
-            getGroupData: 'main/getGroupData'
-        })
-    },
+    // mounted: {
+    //     ...mapGetters({
+    //         getGroupData: 'main/getGroupData'
+    //     })
+    // },
 }
 
 

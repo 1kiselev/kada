@@ -57,7 +57,8 @@
         <my-lit-button
         style="margin-top: 47px; font-weight: 600; font-size: 20px; width: 400px;"
         type="submit"
-        :method="submitForm"
+        :method="login"
+        :params="state.userDataLogin"
         > 
             Принять
         </my-lit-button>
@@ -75,6 +76,7 @@ import MyLitButton from './UI/MyLitButton.vue';
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 import { reactive } from 'vue';
+import { mapMutations, mapActions} from 'vuex';
 
 export default {
     components: {
@@ -110,6 +112,16 @@ export default {
     methods: {
         submitForm() {
             this.v$.$validate()
+        },
+        ...mapMutations({
+            setUserData: 'main/setUserData',
+        }),
+        ...mapActions({
+            userLogin: 'main/userLogin',
+        }),
+        login(data){
+            this.submitForm()
+            this.userLogin(data)
         }
     }
 }

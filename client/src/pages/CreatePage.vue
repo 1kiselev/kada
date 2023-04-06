@@ -49,10 +49,10 @@
                         <div class="little_h"> Название группы</div>
 
                        <my-create-input  
-                       @blur="v$.name_of_group.$touch()"
-                        v-model="state.create.name_of_group"
+                       @blur="v$.name.$touch()"
+                        v-model="state.create.name"
                        ></my-create-input>
-                        <span v-if="v$.name_of_group.$error" style="color:red; display: flex">
+                        <span v-if="v$.name.$error" style="color:red; display: flex">
                             {{ 'Это обязательное поле!' }}
                         </span>
 
@@ -71,7 +71,7 @@
                     </div>
 
                     <textarea
-                    v-model="state.create.description_of_group"
+                    v-model="state.create.description"
                     class="text_desc"></textarea>
                 </div>
         </div>
@@ -81,7 +81,7 @@
 
         <button
         class="button__create"
-        @click="$router.push('/working_group') "
+        @click="create"
 
         >
             Создать
@@ -102,6 +102,7 @@ import MyCreateInput from "@/components/UI/MyCreateInput.vue";
 import { reactive } from 'vue';
 import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
+import { mapActions, mapMutations } from "vuex";
 
 
 export default {
@@ -113,15 +114,15 @@ export default {
     setup() {
         const state = reactive ({
             create: {
-                avatar: '',
-                name_of_group: '',
-                link_group: '',
-                description_of_group: ''
+                // avatar: '',
+                name: '',
+                // link_group: '',
+                description: ''
             }
         })
 
         const rules = {
-            name_of_group: { required}
+            name: { required}
         }
 
         const v$ = useVuelidate(rules, state)
@@ -131,7 +132,23 @@ export default {
             state,
             v$,
         }
+    },
+
+    methods: {
+        ...mapMutations({
+            setGroupData: 'main/setGroupData'
+        }),
+
+        ...mapActions({
+            createGroup: 'main/createGroup',
+        }),
+        create(){
+            this.setGroupData(this.state.create)
+            this.createGroup()
+            this.$router.push('/working_group') 
+        }
     }
+
 
 
 }
