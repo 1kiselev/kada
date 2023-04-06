@@ -1,6 +1,6 @@
 <template>
     <div class="form__login">
-        <input :value="modelValue" @input="updateInput" class="input__create" type="text">
+        <input :value="modelValue" @input="updateInputCreate" class="input__create">
     </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
         modelValue: [String, Number],
     },
     methods: {
-        updateInput(event){
+        updateInputCreate(event){
             this.$emit('update:modelValue', event.target.value)
         }
     }

@@ -1,6 +1,6 @@
 <template>
     <div class="form__login">
-        <input :value="modelValue" @input="updateInput" class="input" type="text">
+        <input :value="modelValue" @input="updateInput" class="input">
     </div>
 </template>
 

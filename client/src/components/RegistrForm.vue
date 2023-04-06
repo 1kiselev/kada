@@ -12,8 +12,8 @@
         <h1 class="registr__header"> Введите ваше имя</h1>
         <my-input
             @blur="v$.username.$touch()"
+            :class="{'is-invalid': v$.username.$error}"
             v-model="state.userData.username"
-            placeholder="Имя"
             type="text"
             style="margin-top: 7px;"
         />
@@ -31,7 +31,6 @@
         <my-input
             @blur="v$.email.$touch()"
             v-model="state.userData.email"
-            placeholder="Email "
             type="email"
             style="margin-top: 7px"
         />
@@ -46,11 +45,10 @@
             style="margin-top: 21px;"
         > Введите ваш пароль</h1>
 
-        <input
+        <my-input
             class="input__password"
             @blur="v$.password.$touch()"
             v-model="state.userData.password"
-            placeholder="Пароль " 
             style="margin-top: 7px"
             type="password"
         />
@@ -65,11 +63,10 @@
          style="margin-top: 21px;"
         > Введите ваш пароль ещё раз</h1>
 
-        <input
+        <my-input
             class="input__password"
             @blur="v$.confirm.$touch()"
             v-model="state.userData.confirm"
-            placeholder="Повторите пароль " 
             style="margin-top: 7px;"
             type="password"
         />
@@ -98,7 +95,7 @@
             type="submit"
             :method="registrate"
             :params="state.userData"
-            @click="registrate(state.userData)"
+            @click="registrate"
         > 
             Принять
         </my-lit-button>
@@ -112,7 +109,7 @@
 <script>
 import MyInput from './UI/MyInput.vue';
 import MyLitButton from './UI/MyLitButton.vue';
-import { mapMutations, mapActions } from 'vuex';
+import { mapMutations, mapActions, mapGetters } from 'vuex';
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength, sameAs } from '@vuelidate/validators';
 import { reactive } from 'vue';
@@ -133,7 +130,7 @@ export default {
                 password: {required, minLength: minLength(6)},
                 confirm: {required, sameAs: sameAs(state.userData.password)}
             }
-
+        
         const v$ = useVuelidate(rules, state)
 
         return  {
@@ -145,7 +142,11 @@ export default {
         MyInput,
         MyLitButton,
     },
-
+    mounted: {
+        ...mapGetters({
+            getUsername: 'main/getUsername'
+        })
+    },
     methods: {
         ...mapMutations({
             setUserData: 'main/setUserData',
@@ -154,6 +155,7 @@ export default {
             userRegistration: 'main/userRegistration',
             userLogin: 'main/userLogin',
         }),
+
         submitForm() {
             this.v$.$validate()
         },
@@ -161,8 +163,7 @@ export default {
             this.submitForm()
             this.setUserData(data)
             this.userRegistration()
-        },
-
+        }
     }
 }
 </script>

@@ -13,7 +13,7 @@
             <div class="left__header__block">
             <h1 class="header__working_group"> Рабочая группа</h1>
 
-            <div class="name__of__group"> Название группы</div>
+            <div class="name__of__group"> getGroupData </div>
         </div>
             <div class="settings__icon"></div>
 
@@ -66,31 +66,32 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import { reactive } from 'vue';
+import { mapMutations, mapActions, mapGetters } from 'vuex';
+
 
 export default {
+    data() {
+
+        return {    
+
+    }
+    },
     components: {
         NavBar,
     },
-    setup() {
-
-    const state = reactive ({
-        subgroupData: {
-            name: '',
-            members: [],
-            task: '',
-        },
-        groupData: {
-            name: '',
-            description: '',
-            members: []
-        }
-    })
-
-
-    return {state}
-    }   
-
-
+    methods: {
+        ...mapMutations({
+            setUserData: 'main/setUserData',
+        }),
+        ...mapMutations({
+            setGroupData: 'main/setGroupData'
+        })
+    },
+    mounted: {
+        ...mapGetters({
+            getGroupData: 'main/getGroupData'
+        })
+    },
 }
 
 

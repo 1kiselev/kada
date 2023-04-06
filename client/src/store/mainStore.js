@@ -73,7 +73,6 @@ export const mainStore = {
                     password: state.user.password,
                     username: state.user.username
                 })
-                
                 commit('setToken', response.token)
             } catch (error) {
                 console.log(error)
@@ -89,6 +88,31 @@ export const mainStore = {
                 commit('setToken', response.token)
                 commit('setUsername', response.username)
                 console.log("Успешно")
+            } catch (error) {
+                console.log(error)
+            }
+        },
+
+        async createGroup({state, commit}) {
+            try {
+                const response = await axios.post('http://localhost:5000/create/group', {
+                    name: state.group.name,
+                    description: state.group.description,
+                    meembers: state.group.members
+                })
+                commit('setGroupData', response.groupData.name)
+                console.log('Успешно')
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        async get_members_from_API({state, commit}) {
+            try{
+                const response = await axios.get('http://localhost:5000/create/group', {
+                    members: state.group.members,
+                })
+                commit('setGroupData', response.groupData.members)
+                console.log('Успешно')
             } catch (error) {
                 console.log(error)
             }
