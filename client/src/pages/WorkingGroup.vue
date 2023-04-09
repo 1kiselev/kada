@@ -49,8 +49,10 @@
                         <button class="button__categories"> Найстройки </button>
                     </div>
                 </div>
-
-                <div class="roadmap__content"></div>
+                <kanban-board></kanban-board>
+                <div class="roadmap__content">
+                    
+                </div>
 
 
             </div>
@@ -65,6 +67,7 @@
 
 <script>
 import NavBar from "@/components/NavBar.vue";
+import KanbanBoard from "@/components/kanban/KanbanBoard.vue";
 import { reactive } from 'vue';
 import { mapMutations, mapActions, mapGetters } from 'vuex';
 
@@ -78,6 +81,7 @@ export default {
     },
     components: {
         NavBar,
+        KanbanBoard,
     },
     methods: {
         ...mapMutations({
@@ -207,6 +211,13 @@ export default {
     height: 25px;
     background-color: black;
     color: white;
+}
+
+.roadmap_content{
+    width: 1500px;
+    height: 1000px;
+    background: teal;
+
 }
 
 </style>

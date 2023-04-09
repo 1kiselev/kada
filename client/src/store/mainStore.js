@@ -67,12 +67,12 @@ export const mainStore = {
     },
 
     actions: {
-        async userRegistration({state, commit}){
+        async userRegistration({state, commit}, data){
             try {
                 const response = await axios.post('http://localhost:5000/auth/registration', {
-                    email: state.user.email,
-                    password: state.user.password,
-                    username: state.user.username
+                    email: data.email,
+                    password: data.password,
+                    username: data.username
                 })
                 console.log(response)
                 commit('setToken', response.token)
