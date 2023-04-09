@@ -162,7 +162,7 @@ export default {
         registrate(data){
             this.submitForm()
             this.setUserData(data)
-            this.userRegistration()
+            this.userRegistration(data)
         }
     }
 }
