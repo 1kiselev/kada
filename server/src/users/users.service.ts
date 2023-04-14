@@ -40,16 +40,6 @@ export class UsersService {
     async getUsersByIds(ids: Array<number>){
         return this.userRepository.findAndCountAll({ where: {id: ids} })
     }
-    
-    // async addRole(dto: AddRoleDto){
-    //     const user = await this.userRepository.findByPk(dto.user_id);
-    //     const role = await this.roleService.getRoleByValue(dto.value);
-    //     if (role && user) {
-    //         await user.$add('role', role.id);
-    //         return dto;
-    //     }
-    //     throw new HttpException('Пользователь или роль не найдены', HttpStatus.NOT_FOUND);
-    // }
 
     async ban(dto: BanUserDto) {
         const user = await this.userRepository.findByPk(dto.userId);

@@ -13,6 +13,7 @@ export const mainStore = {
             task: '',
         },
         group: {
+            id: '',
             name: '',
             description: '',
             members: []

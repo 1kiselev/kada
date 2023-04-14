@@ -31,7 +31,7 @@
                     <button class="button__categories"> Чат </button>
                 </div>
         
-
+                <create-task-modal></create-task-modal>
                 <div class="left__content">
                     <div class="subgroups__content"></div>
                     <div class="members__content"></div>
@@ -68,6 +68,7 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import KanbanBoard from "@/components/kanban/KanbanBoard.vue";
+import CreateTaskModal from "@/components/kanban/CreateTaskModal.vue";
 import { reactive } from 'vue';
 import { mapMutations, mapActions, mapGetters } from 'vuex';
 
@@ -82,6 +83,7 @@ export default {
     components: {
         NavBar,
         KanbanBoard,
+        CreateTaskModal,
     },
     methods: {
         ...mapMutations({
