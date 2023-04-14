@@ -37,7 +37,6 @@ export class GroupsService {
         const user_group_id = userGroup.id
         await this.addRole({ value, user_group_id })
         const response = { group: group, members: await this.getGroupUsers(group_id)}
-        // console.log(response)
         return response;
     }
 

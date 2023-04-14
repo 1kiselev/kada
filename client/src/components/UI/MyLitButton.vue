@@ -22,7 +22,8 @@
         },
         methods: {
             foo(method, params){
-                method(params)
+                console.log(params)
+                method(...params)
             }
         }
     }

@@ -1,8 +1,10 @@
 import { ApiProperty } from "@nestjs/swagger/dist/decorators";
-import { BelongsToMany, Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, DataType, HasMany, HasOne, Model, Table } from "sequelize-typescript";
 import { User } from "src/users/users.model";
 import { Subgroup } from "./subgroups/subgroups.model";
 import { UserGroup } from "./users-group/users-group.model";
+import { Kanban } from "src/tools/kanban/kanban.model";
+import { ChatRoom } from "src/tools/chat/model/room/room.entity";
 
 interface GroupCreationAttrs {
     name: string;
@@ -26,9 +28,14 @@ export class Group extends Model<Group, GroupCreationAttrs> {
     @HasMany(() => UserGroup)
     usersGroup: UserGroup[]
     
+    @HasOne(() => Kanban)
+    kanbanId: number;
 
     @HasMany(() => Subgroup)
     subgroup: Subgroup[]
+
+    @HasMany(() => ChatRoom)
+    chatRooms: ChatRoom[]
 }
 
-export class UsersModule {}
+// export class UsersModule {}
