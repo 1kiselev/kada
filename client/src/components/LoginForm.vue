@@ -12,8 +12,7 @@
         <my-input
         @blur="v$.email.$touch()"
         placeholder="Email"
-        v-model="state.userDataLogin.email"
-        type="email"
+        v-model="state.userDataLogin.email" type="email"
         id="email"
         style="
         margin-top: 12px;"
@@ -28,12 +27,12 @@
         > Введите ваш пароль </h1>
 
         <my-input
+        type="password"
         @blur="v$.password.$touch()"
         placeholder="Пароль "
         v-model="state.userDataLogin.password"
         id="password"
         style="margin-top: 12px;"
-        type="password"
         />
         <span v-if="v$.password.$error"
         style="color:red"
@@ -122,6 +121,7 @@ export default {
         login(data){
             this.submitForm()
             this.userLogin(data)
+            this.$router.push('/')
         }
     }
 }

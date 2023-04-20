@@ -11,24 +11,26 @@
 
             <div class="login_registr">
 
+                <div class="hi__user"> Hi,  {{ this.user.username }} !</div>
+
                 <div class="my_groups_my_projects">
                 Мои группы
                 </div>
 
-                <div class="login"
-                @click="showLogin"
-                >
-                    Войти
-                </div>
+                    <div class="login"
+                    v-if="authCheck == false"
+                    @click="showLogin"
+                    >
+                        Войти
+                    </div>
 
-                <div class="registration"
-                @click="showRegistr"
-                >
-                    Создать аккаунт 
-                </div>
+                    <div class="registration"
+                    @click="showRegistr"
+                    >
+                        Создать аккаунт 
+                    </div>
             </div>
 
-        
 
         <my-login v-model:show="LoginVisible">
             <login-form/>
@@ -49,6 +51,7 @@ import MyLogin from './UI/MyLogin.vue';
 import LoginForm from './LoginForm.vue';
 import MyRegistr from './UI/MyRegistr.vue';
 import RegistrForm from './RegistrForm.vue';
+import { mapGetters } from 'vuex';
 
 
 export default {
@@ -62,27 +65,36 @@ export default {
         return {
             LoginVisible: false,
             RegistrVisible: false,
+            authCheck: false,
+            user: this.getUserData(),
         }
     },
     methods: {
         showLogin() {
             this.LoginVisible = true;
-            console.log('дошёл до этого момента')
 
         },
         showRegistr() {
             this.RegistrVisible = true;
+        },
+        ...mapGetters ({
+            authCheck: 'main/authCheck',
+            getUserData: 'main/getUserData'
+        }),
+    },
+    props: {
+        authCheck: {
+            type: Boolean,
+            requred: true
         }
     },
+   
 }
 
 </script>
 
 
 <style>
-
-
-
 .navbar {
     display: flex;
     align-items: center;
@@ -113,6 +125,17 @@ export default {
     text-align: center;
     color: #FFFFFF;
     cursor: pointer;
+    transition: color 0.3s;
+}
+
+.hi__user {
+    margin-right: 20px;
+    font-family: 'Advent Pro';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 33px;
+    text-align: center;
+    color: #f5cf13;
     transition: color 0.3s;
 }
 

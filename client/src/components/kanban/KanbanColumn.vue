@@ -3,7 +3,7 @@
     <div class="bar">
         {{ this.name }}
     </div>
-    <div class="content">
+    <div class="content__kanban">
         <kanban-card
             v-for="task in tasks"
             :key="task.name"
@@ -40,9 +40,6 @@ export default {
         
     },
     
- 
-    
-
 }
 </script>
 
@@ -52,17 +49,12 @@ export default {
     margin: 10px;
     /* background: red; */
     border: solid 5px;
-    border-color: #323031;
+    border-color: #949494;
 }
 .bar{
-    color: #323031;
+    color: #ffffff;
     font-size: larger;
     margin: 10px;
-}
-
-.content{
-    /* justify-content: center;     */
-    width: 290px;
 }
 
 </style>
