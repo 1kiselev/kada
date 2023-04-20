@@ -158,11 +158,12 @@ export default {
 
         submitForm() {
             this.v$.$validate()
-        },
+        }, 
         registrate(data){
             this.submitForm()
             this.setUserData(data)
             this.userRegistration(data)
+            this.$router.push('/')
         }
     }
 }
@@ -211,7 +212,6 @@ export default {
     border-bottom: 2px solid gray;
     font-size: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    padding-left: 10px;
     transition: 0.4s;
     color: white;
 }

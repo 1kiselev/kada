@@ -1,0 +1,100 @@
+<template>
+    <div class="member__card">
+
+        <div class="member__photo"></div>
+
+        <div class="members__content">
+
+            <div class="member__name"> 
+                {{ this.member.name }}
+            </div>
+
+            <div class="member__role">
+                {{ this.member.role }}
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+</template>
+
+
+<script>
+export default {
+    data() {
+        return {
+            name: 'member-card',
+        }
+    },
+    props: {
+        member: {
+            type: Object,
+            required: true
+            }
+    }
+}
+
+</script>
+
+
+
+<style>
+
+.member__card {
+
+position: relative;
+width: 300px;
+height: 88px;
+display: flex;
+align-items: center;
+background: #131212;
+border-radius: 8px;
+padding-left: 20px;
+margin-bottom: 10px;
+cursor: pointer;
+transition: background 0.3s;
+}
+
+.member__card:hover {
+    background: #312e2e;
+
+}
+
+.member__photo {
+width: 52px;
+height: 52px;
+background: #D9D9D9;
+border-radius: 20px;
+margin-right: 15px;
+
+}
+
+.members__content {
+    display: block;
+    align-items: center;
+    justify-content: column;
+}
+    
+.member__name {
+font-family: 'Advent Pro';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 18px;
+color: #FFFFFF;
+}
+
+.member__role {
+    font-family: 'Advent Pro';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 18px;
+color: #f5cf13;
+}
+
+</style>
