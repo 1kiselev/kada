@@ -36,10 +36,6 @@
                 <div class="tabs">
 
                 <div class="left__categories">
-                    <a href="#tab_01" class="button__categories" > Подгруппы</a>
-                    <a href="#tab_02" class="button__categories" > Участники </a>
-                    <a href="#tab_03" class="button__categories"> Чат </a>
-
 
                 </div>
             </div>
@@ -74,6 +70,7 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import KanbanBoard from "@/components/kanban/KanbanBoard.vue";
+import CreateTaskModal from "@/components/kanban/CreateTaskModal.vue";
 import { reactive } from 'vue';
 import { mapMutations, mapActions, mapGetters, mapState } from 'vuex';
 import EditGroup from "@/components/UI/EditGroup.vue";
@@ -97,6 +94,7 @@ export default {
         EditForm,
         membersBoard,
         subGroupsBoard
+        CreateTaskModal,
     },
     methods: {
         ...mapMutations({

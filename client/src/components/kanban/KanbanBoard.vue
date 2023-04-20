@@ -4,22 +4,18 @@
         <kanban-column
         :name="'Открыто'"
         :status="'Open'"
-        :tasks="open"
         ></kanban-column>
         <kanban-column
         :name="'В процессе'"
         :status="'InProgress'"
-        :tasks="inProgress"
         ></kanban-column>
         <kanban-column
         :name="'На проверке'"
         :status="'InTest'"
-        :tasks="inTest"
         ></kanban-column>
         <kanban-column
         :name="'Выполнено'"
         :status="'Done'"
-        :tasks="done"
         ></kanban-column>
     </div>
   </div>
@@ -32,14 +28,6 @@ import {mapState, mapGetters, mapActions, mapMutations} from 'vuex'
 // import KanbanColumn from '@/components/kanban/KanbanColumn.vue'
 
 export default {
-    data(){
-        return{
-            open: this.getTasks().filter(task => task.status === 'Open'),
-            inProgress: this.getTasks().filter(task => task.status === 'InProgress'),
-            inTest: this.getTasks().filter(task => task.status === 'InTest'),
-            done: this.getTasks().filter(task => task.status === 'Done'),
-        }
-    },
     components: {
         KanbanColumn
     },
@@ -55,8 +43,6 @@ export default {
 
 <style>
 .kanban-board{
-    background: rgba(217, 217, 217, 0.1);
-    width: 1432px;
     height: 699px;
     color: white;
 }

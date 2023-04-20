@@ -20,10 +20,21 @@ import { Subgroup } from "./groups/subgroups/subgroups.model";
 import { UserGroup } from "./groups/users-group/users-group.model";
 import { UserSubgroup } from "./groups/subgroups/users-group-subgroups.model";
 import { UserGroupRoles } from "./roles/user-group-roles.model";
+import { ToolsModule } from './tools/tools.module';
+import { KanbanService } from './tools/kanban/kanban.service';
+import { KanbanController } from './tools/kanban/kanban.controller';
+import { KanbanModule } from './tools/kanban/kanban.module';
+import { AppController } from "./app.controller";
+import { Kanban } from "./tools/kanban/kanban.model";
+import { KanbanTask } from "./tools/kanban/kanbanTask.model";
+import { UserGroup_KanbanTask } from "./tools/kanban/UserGroup-KanbanTask.model";
+import { ChatModule } from "./tools/chat/chat.module";
+import { UserGroup_ChatRoom } from "./tools/chat/model/room/userGroup-chatRoom.model";
+import { ChatRoom } from "./tools/chat/model/room/room.entity";
 
 @Module({
-    controllers: [],
-    providers: [],
+    controllers: [AppController],
+    providers: [AppService],
     imports: [
         ConfigModule.forRoot({
             envFilePath: `.${process.env.NODE_ENV}.env`
@@ -38,7 +49,12 @@ import { UserGroupRoles } from "./roles/user-group-roles.model";
           username: process.env.POSTGRES_USER,
           password: process.env.POSTGRESS_PASSWORD,
           database: process.env.POSTGRES_DB,
-          models: [User, Role, UserRoles, Group, Subgroup, UserGroup, UserGroupRoles,UserSubgroup],
+          models: [User, Role, UserRoles,
+            Group, Subgroup, UserGroup,
+            UserGroupRoles,UserSubgroup, Kanban, 
+            KanbanTask, UserGroup_KanbanTask, UserGroup_ChatRoom,
+            ChatRoom,  
+          ],
           autoLoadModels: true,
         }),
         UsersModule,
@@ -46,6 +62,9 @@ import { UserGroupRoles } from "./roles/user-group-roles.model";
         AuthModule,
         GroupsModule,
         SubgroupsModule,
+        ToolsModule,
+        KanbanModule,
+        ChatModule,
       ],
 })
 export class AppModule {}

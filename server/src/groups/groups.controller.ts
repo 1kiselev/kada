@@ -7,7 +7,9 @@ import { GroupsService } from './groups.service';
 
 @Controller('groups')
 export class GroupsController {
-    constructor(private groupsService: GroupsService) {}
+    constructor(
+        private groupsService: GroupsService
+        ) {}
 
     @ApiOperation({summary: 'Создать группу'})
     @ApiResponse({status: 200})
@@ -43,4 +45,5 @@ export class GroupsController {
     getInfo(@Query() params){
         return this.groupsService.getInfo(params.id)
     }
+
 }

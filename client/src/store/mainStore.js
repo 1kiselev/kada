@@ -18,6 +18,7 @@ export const mainStore = {
             }
         },
         group: {
+            id: '',
             name: '',
             description: '',
             members: [

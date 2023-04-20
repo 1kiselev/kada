@@ -1,13 +1,18 @@
 <template>
-  <div class="kanban-column">
-    <div class="bar">
+  <div class="kanban-column"
+        >
+    <div class="bar" 
+        :class="this.status"
+    >
         {{ this.name }}
     </div>
-    <div class="content__kanban">
         <kanban-card
-            v-for="task in tasks"
+            v-for="task in actualCards"
             :key="task.name"
             :task="task"
+            @dragstart="onDragStart($event, task)"
+            @dragend="onDragEnd()"
+            draggable="true"
         ></kanban-card>
     </div>
   </div>
@@ -23,6 +28,12 @@ export default {
     components: {
         KanbanCard
     },
+
+    data(){
+        return {
+            // cards: this.actualCards()
+        }
+    },
     
     props: {
         name:{
@@ -33,13 +44,9 @@ export default {
             type: String,
             required: true
         },
-        tasks: {
-            type: Object,
-            required: true,
-        }
-        
     },
     
+
 }
 </script>
 
@@ -52,9 +59,9 @@ export default {
     border-color: #949494;
 }
 .bar{
-    color: #ffffff;
     font-size: larger;
     margin: 10px;
 }
+
 
 </style>
