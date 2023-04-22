@@ -31,6 +31,9 @@ import { UserGroup_KanbanTask } from "./tools/kanban/UserGroup-KanbanTask.model"
 import { ChatModule } from "./tools/chat/chat.module";
 import { UserGroup_ChatRoom } from "./tools/chat/model/room/userGroup-chatRoom.model";
 import { ChatRoom } from "./tools/chat/model/room/room.entity";
+import { JoinedRoom } from "./tools/chat/model/joined-room/joined-room.entity";
+import { ConnectedUser } from "./tools/chat/model/connected-user/connected-user.entity";
+import { Message } from "./tools/chat/model/message/message.entity";
 
 @Module({
     controllers: [AppController],
@@ -53,7 +56,7 @@ import { ChatRoom } from "./tools/chat/model/room/room.entity";
             Group, Subgroup, UserGroup,
             UserGroupRoles,UserSubgroup, Kanban, 
             KanbanTask, UserGroup_KanbanTask, UserGroup_ChatRoom,
-            ChatRoom,  
+            ChatRoom,  JoinedRoom, ConnectedUser, Message,
           ],
           autoLoadModels: true,
         }),

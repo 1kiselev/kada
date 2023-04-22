@@ -31,6 +31,15 @@ export class UsersGroupService {
         return await this.userGroupRepository.findByPk(id);
     }
 
+    async getUserGroupByEmail(email: string, group_id: number){
+        const user = await this.userService.getUserByEmail(email)
+        return user.usersGroup.find(ug => ug.groupId === group_id)
+        
+    }
 
+    async getUsersChatRooms(user_id: number){
+        const userGroup = await this.getUserGroupById(user_id)
+        return userGroup.chatRooms
+    }
 
 }

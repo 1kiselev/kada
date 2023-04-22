@@ -1,35 +1,37 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { ConnectedUserEntity } from 'src/chat/model/connected-user/connected-user.entity';
-import { ConnectedUserI } from 'src/chat/model/connected-user/connected-user.interface';
-import { UserI } from 'src/user/model/user.interface';
-import { Repository } from 'typeorm';
+// import { InjectRepository } from '@nestjs/typeorm';
+// import { ConnectedUserEntity } from 'src/chat/model/connected-user/connected-user.entity';
+// import { ConnectedUserI } from 'src/chat/model/connected-user/connected-user.interface';
+// import { UserI } from 'src/user/model/user.interface';
+// import { Repository } from 'typeorm';
+import { ConnectedUser } from '../../model/connected-user/connected-user.entity';
+import { InjectModel } from '@nestjs/sequelize';
+import { CreateConnectedUserDto } from '../../dto/create-connected-user.dto';
 
 @Injectable()
 export class ConnectedUserService {
 
-  constructor(
-    @InjectRepository(ConnectedUserEntity)
-    private readonly connectedUserRepository: Repository<ConnectedUserEntity>
+  constructor(@InjectModel(ConnectedUser)
+    private connectedUserRepository: typeof ConnectedUser
   ) { }
 
-  async create(connectedUser: ConnectedUserI): Promise<ConnectedUserI> {
-    return this.connectedUserRepository.save(connectedUser);
+  async create(dto: CreateConnectedUserDto){
+    return await this.connectedUserRepository.create(dto)
+  }
+  
+
+  async findByUserGroup(user_group_id: number) {
+    return this.connectedUserRepository.findAll({where: {userGroupId: user_group_id}});
   }
 
-  async findByUser(user: UserI): Promise<ConnectedUserI[]> {
-    return this.connectedUserRepository.find({ user });
-  }
-
-  async deleteBySocketId(socketId: string) {
-    return this.connectedUserRepository.delete({ socketId });
+  async deleteBySocketId(socket_id: string) {
+    return this.connectedUserRepository.destroy({where: {socketId: socket_id }})
   }
 
   async deleteAll() {
-    await this.connectedUserRepository
-      .createQueryBuilder()
-      .delete()
-      .execute();
+    await this.connectedUserRepository.destroy({
+      truncate: true
+    });
   }
 
 }

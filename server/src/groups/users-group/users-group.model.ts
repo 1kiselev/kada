@@ -1,4 +1,4 @@
-import {BelongsToMany, Column, DataType, ForeignKey, Model, Table} from "sequelize-typescript";
+import {BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table} from "sequelize-typescript";
 import {ApiProperty} from "@nestjs/swagger";
 import {User} from "../../users/users.model";
 import {Group} from "../groups.model";
@@ -12,6 +12,7 @@ import { KanbanTask } from "src/tools/kanban/kanbanTask.model";
 import { UserGroup_KanbanTask } from "src/tools/kanban/UserGroup-KanbanTask.model";
 import { UserGroup_ChatRoom } from "src/tools/chat/model/room/userGroup-chatRoom.model";
 import { ChatRoom } from "src/tools/chat/model/room/room.entity";
+import { ConnectedUser } from "src/tools/chat/model/connected-user/connected-user.entity";
 
 interface createUserGroup {
     userId: number;
@@ -41,8 +42,10 @@ export class UserGroup extends Model<UserGroup> {
     @BelongsToMany(() => KanbanTask, () => UserGroup_KanbanTask)
     kanbanTasks: KanbanTask[];
 
-    // @BelongsToMany(() => ChatRoom, () => UserGroup_ChatRoom)
-    // chatRooms: ChatRoom[];
-    
+    @BelongsToMany(() => ChatRoom, () => UserGroup_ChatRoom)
+    chatRooms: ChatRoom[];
 
+    @HasMany(() => ConnectedUser)
+    connections: ConnectedUser[];
+    
 }

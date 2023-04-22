@@ -1,22 +1,37 @@
-import { UserEntity } from "src/user/model/user.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { RoomEntity } from "../room/room.entity";
+import { UserGroup } from "src/groups/users-group/users-group.model"; 
+import { BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { ChatRoom } from "../room/room.entity";
 
-@Entity()
-export class JoinedRoomEntity {
+interface JoinedRoomCreationAttrs {
+  id: number;
+  socketId: string;
+  userGroupId: number;
+  roomId: number;
+}
 
-  @PrimaryGeneratedColumn()
+@Table({tableName: 'joined-room', createdAt: false, updatedAt: false})
+export class JoinedRoom extends Model<JoinedRoom, JoinedRoomCreationAttrs>{
+
+  @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
   id: number;
 
-  @Column()
+  @Column({type: DataType.STRING, unique: true})
   socketId: string;
 
-  @ManyToOne(() => UserEntity, user => user.joinedRooms)
-  @JoinColumn()
-  user: UserEntity;
+  // @ManyToOne(() => UserEntity, user => user.joinedRooms)
+  // @JoinColumn()
+  // user: UserEntity;
 
-  @ManyToOne(() => RoomEntity, room => room.joinedUsers)
-  @JoinColumn()
-  room: RoomEntity;
+  @ForeignKey(() => UserGroup)
+  @Column({type: DataType.INTEGER})
+  userGroupId: number;
+
+  // @ManyToOne(() => RoomEntity, room => room.joinedUsers)
+  // @JoinColumn()
+  // room: RoomEntity;
+
+  @ForeignKey(() => ChatRoom)
+  @Column({type: DataType.INTEGER})
+  chatRoomId: number;
 
 }
