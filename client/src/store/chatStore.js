@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const mainStore = {
+export const chatStore = {
     state: () => ({
         chatRoom: {
             id: 1,

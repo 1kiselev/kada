@@ -1,4 +1,5 @@
-import { MessageItem } from '../UI/MessageItem'
+import MessageItem from './MessageItem'
+
 
 export default [
     MessageItem,

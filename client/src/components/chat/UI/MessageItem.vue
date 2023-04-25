@@ -7,10 +7,8 @@
 </template>
 
 <script>
-
 export default {
-
-    name: 'MessageItem',
+    name: 'message-item',
 
     props:{
         messageData: {

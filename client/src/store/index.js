@@ -8,6 +8,6 @@ export default createStore({
   modules: {
     main: mainStore,
     tools: kadaTools,
-    chatStore,
+    chat: chatStore,
   }
 })
