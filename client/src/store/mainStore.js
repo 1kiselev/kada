@@ -1,26 +1,66 @@
 import axios from "axios"
 
+axios.defaults.baseURL = 'http://localhost:5000/'
+
 export const mainStore = {
     state: () => ({
         user: {
-            email: 'alex1@mail.com',
-            username: 'alex1',
+            email: '',
+            username: '',
         },
+
         userGroup: {
             id: 1,
 
         },
+
+        authCheck: false,
+
         token: '',
-        subgroup: {
-            name: '',
-            members: [],
-            task: '',
+        subgroups: {
+            subGroup: {
+                name: 'mySubGorup',
+                members: [],
+                task: 'do a new work',
+            }
         },
         group: {
             id: '',
             name: '',
             description: '',
-            members: []
+            members: [
+                {
+                    name: 'Qstone 433',
+                    role: 'goest'
+                },
+                {
+                    name: 'Alex',
+                    role: 'admin'
+
+                },
+                {
+                    name: 'Jhon',
+                    role: 'goest'
+
+                }
+            ],
+            subGroups: [
+                {
+                    name: 'mySubGorup',
+                    members: [],
+                    task: 'do a new work',
+                },
+                {
+                    name: 'mySubGorup1',
+                    members: [],
+                    task: 'do a new work1',
+                },
+                {
+                    name: 'mySubGorup2',
+                    members: [],
+                    task: 'do a new work2',
+                }
+            ]
         }
 
     }),
@@ -35,11 +75,18 @@ export const mainStore = {
         getGroupData(state) {
             return state.group
         },
-        getSubGroupData(state) {
-            return state.subgroup
-        },
+
         getUserGroupData(state){
             return state.userGroup
+
+        getSubGroupsData(state) {
+            return state.group.subGroups
+        },
+        getMembers(state) {
+            return state.group.members
+        },
+        authCheck: state => {
+            return ('username' in state.user) ? true : false;
         }
     },
 
@@ -47,6 +94,9 @@ export const mainStore = {
         setUserData(state, userData){
             state.user.email = userData.email
             state.user.username = userData.username
+        },
+        setAuthCheck() {
+            state.authCheck = data.authCheck
         },
         setToken(state, token){
             state.token = token
@@ -75,9 +125,9 @@ export const mainStore = {
     },
 
     actions: {
-        async userRegistration({state, commit}, data){
+        async userRegistration({commit}, data){
             try {
-                const response = await axios.post('http://localhost:5000/auth/registration', {
+                const response = await axios.post('auth/registration', {
                     email: data.email,
                     password: data.password,
                     username: data.username
@@ -89,12 +139,14 @@ export const mainStore = {
             }
         },
 
-        async userLogin({state, commit}, data){
+        async userLogin({commit}, data){
             try {
-                const response = await axios.post('http://localhost:5000/auth/login', {
+                const response = await axios.post('auth/login', {
                     email: data.email,
                     password: data.password,
+                    authCheck: true,
                 })
+                localStorage.setItem('token', response.data.token)
                 commit('setUserData', { email: data.email, username: response.data.username })
                 commit('setToken', response.data.token)
             } catch (error) {
@@ -104,7 +156,7 @@ export const mainStore = {
 
         async createGroup({state, commit}) {
             try {
-                const response = await axios.post('http://localhost:5000/groups', {
+                const response = await axios.post('groups', {
                     name: state.group.name,
                     description: state.group.description,
                     creator: state.user.email
@@ -119,10 +171,10 @@ export const mainStore = {
         },
         async get_members_from_API({state, commit}) {
             try{
-                const response = await axios.get('http://localhost:5000/create/group', {
+                const response = await axios.get('create/group', {
                     members: state.group.members,
                 })
-                commit('setGroupData', response.groupData.members)
+                commit('setGroupData', response.data.members)
                 console.log('Успешно')
             } catch (error) {
                 console.log(error)

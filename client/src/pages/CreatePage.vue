@@ -45,7 +45,7 @@
 
                 <div class="one_block">
                     
-                    <div class="name">
+                    <div class="name__h">
                         <div class="little_h"> Название группы</div>
 
                        <my-create-input  
@@ -201,7 +201,7 @@ export default {
     margin-bottom: 39px;
 }
 
-.name {
+.name__h {
     display: block;
     margin-bottom: 10px;
 }

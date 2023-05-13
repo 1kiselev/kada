@@ -35,8 +35,7 @@ export default {
     width: 250px;
     height: 110px;
     border: solid 5px;
-    background: #323031;
-    border-color: #323031;
+
     border-radius: 5%;
     /* background: teal; */
     margin: 15px;
@@ -56,19 +55,18 @@ export default {
 }
 
 .name{
-    color: #FFFAFB;
+
     font-size: larger;  
     margin: 10px;
 }
 
-.deadline{    
-    color: #FFFAFB;
+
     font-size: large;
     margin: 10px;
 }
 
 .status{
-    color: #FFFAFB;
+
     font-size: medium;
     margin: 10px;
 }

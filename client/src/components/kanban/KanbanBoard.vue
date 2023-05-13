@@ -43,10 +43,8 @@ export default {
 
 <style>
 .kanban-board{
-    background: #4d4d4d ;
-    color: #FFFAFB;
-    width: 1300px;
     height: 699px;
+    color: white;
 }
 
 .colums{

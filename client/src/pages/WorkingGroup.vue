@@ -13,9 +13,17 @@
             <div class="left__header__block">
             <h1 class="header__working_group"> Рабочая группа</h1>
 
-            <div class="name__of__group"> getGroupData </div>
+            <div class="name__of__group"> {{ this.group.name }} </div>
         </div>
-            <div class="settings__icon"></div>
+            <div class="settings__icon"
+            @click="editWindowVisible"
+            ></div>
+
+            <edit-group v-model:show="editVissible">
+                <edit-form></edit-form>
+            </edit-group>
+
+            
 
         </div>
 
@@ -25,18 +33,16 @@
         
             <div class="left__panel">
 
+                <div class="tabs">
+
                 <div class="left__categories">
-                    <button class="button__categories"> Подгруппы</button>
-                    <button class="button__categories"> Участники </button>
-                    <button class="button__categories"> Чат </button>
+
                 </div>
-        
-                <create-task-modal></create-task-modal>
-                <div class="left__content">
-                    <div class="subgroups__content"></div>
-                    <div class="members__content"></div>
-                    <div class="chat__content"></div>
-                </div>
+            </div>
+                <members-board :show="boardVisible"></members-board>
+
+                <sub-groups-board :show="subGroupsBoardVisible"></sub-groups-board>
+
 
             </div>
 
@@ -49,11 +55,13 @@
                         <button class="button__categories"> Найстройки </button>
                     </div>
                 </div>
+
                 <!-- <kanban-board></kanban-board> -->
                 <chat-field></chat-field>
                 <!-- <div class="roadmap__content">
                     
                 </div> -->
+
 
 
             </div>
@@ -71,19 +79,30 @@ import NavBar from "@/components/NavBar.vue";
 import KanbanBoard from "@/components/kanban/KanbanBoard.vue";
 import CreateTaskModal from "@/components/kanban/CreateTaskModal.vue";
 import { reactive } from 'vue';
-import { mapMutations, mapActions, mapGetters } from 'vuex';
 import ChatField from '../components/chat/ChatField.vue';
+
+import { mapMutations, mapActions, mapGetters, mapState } from 'vuex';
+import EditGroup from "@/components/UI/EditGroup.vue";
+import EditForm from "@/components/EditForm.vue";
+import membersBoard from "@/components/members/membersBoard.vue";
+import subGroupsBoard from "@/components/subGroups.vue/subGroupsBoard.vue";
 
 export default {
     data() {
-
         return {    
-
+            editVissible: false,
+            group: this.getGroupData(),
+            boardVisible: false,
+            subGroupsBoardVisible: false
     }
     },
     components: {
         NavBar,
         KanbanBoard,
+        EditGroup,
+        EditForm,
+        membersBoard,
+        subGroupsBoard
         CreateTaskModal,
         ChatField,
     },
@@ -93,7 +112,19 @@ export default {
         }),
         ...mapMutations({
             setGroupData: 'main/setGroupData'
-        })
+        }),
+        editWindowVisible() {
+            this.editVissible = true
+        },
+        ...mapGetters({
+            getGroupData: 'main/getGroupData',
+        }),
+        showBoard() {
+            this.boardVisible = true
+        },
+        showSubGroupsBoard() {
+            this.subGroupsBoardVisible = true
+        }
     },
     // mounted: {
     //     ...mapGetters({
@@ -151,7 +182,7 @@ export default {
 }
 
 .name__of__group {
-    color: yellow;
+    color: #f5cf13;
     font-size: 20px;
 }
 
@@ -198,7 +229,6 @@ export default {
     width: 1432px;
     height: 699px;
     top: 40px;
-    background: #4d4d4d;
     left: 50px;
 
 }
