@@ -49,10 +49,11 @@
                         <button class="button__categories"> Найстройки </button>
                     </div>
                 </div>
-                <kanban-board></kanban-board>
-                <div class="roadmap__content">
+                <!-- <kanban-board></kanban-board> -->
+                <chat-field></chat-field>
+                <!-- <div class="roadmap__content">
                     
-                </div>
+                </div> -->
 
 
             </div>
@@ -71,7 +72,7 @@ import KanbanBoard from "@/components/kanban/KanbanBoard.vue";
 import CreateTaskModal from "@/components/kanban/CreateTaskModal.vue";
 import { reactive } from 'vue';
 import { mapMutations, mapActions, mapGetters } from 'vuex';
-
+import ChatField from '../components/chat/ChatField.vue';
 
 export default {
     data() {
@@ -84,6 +85,7 @@ export default {
         NavBar,
         KanbanBoard,
         CreateTaskModal,
+        ChatField,
     },
     methods: {
         ...mapMutations({

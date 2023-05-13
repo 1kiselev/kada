@@ -15,7 +15,8 @@ import { CreateJoinedRoomDto } from '../dto/create-joined-room.dto';
 import { CreateMessageDto } from '../dto/create-message.dto';
 
 // ['https://hoppscotch.io', 'http://localhost:3000', 'http://localhost:4200']
-@WebSocketGateway({ cors: { origin: '*' } })
+// @WebSocketGateway({ cors: { origin: 'localhost:5000' } })
+@WebSocketGateway({ cors: { origin: ['http://localhost:5000'] } })
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect, OnModuleInit {
 
   @WebSocketServer()
@@ -42,11 +43,14 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect, On
       const user = await this.usersService.getUserByEmail(socket.handshake.headers.authorization) // !!!!!!!!!!1
       
       if (!user) {
+        console.log('AAAAAAAAA')
         return this.disconnect(socket);
       } else {
-        const userGroup = await this.userGroupsService.getUserGroupById(user.id);
+        const userGroup = await this.userGroupsService.getUserGroupByEmail(user.email, Number(socket.handshake.headers.groupid));
+        // const userGroup = user.usersGroup.find(ug => ug.groupId === Number(socket.handshake.headers.groupid))
         socket.data.user = user;
         socket.data.userGroup = userGroup;
+        console.log('\n\n', userGroup,  )
         // const rooms = await this.roomService.getRoomsForUser(user.id, { page: 1, limit: 10 });
         const rooms = await this.userGroupsService.getUsersChatRooms(userGroup.id)
         // substract page -1 to match the angular material paginator
@@ -56,7 +60,8 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect, On
         // Only emit rooms to the specific connected client
         return this.server.to(socket.id).emit('rooms', rooms);
       }
-    } catch {
+    } catch(e) {
+      console.log('\n\n111111111111\n\n',e)
       return this.disconnect(socket);
     }
   }

@@ -6,6 +6,10 @@ export const mainStore = {
             email: 'alex1@mail.com',
             username: 'alex1',
         },
+        userGroup: {
+            id: 1,
+
+        },
         token: '',
         subgroup: {
             name: '',
@@ -33,6 +37,9 @@ export const mainStore = {
         },
         getSubGroupData(state) {
             return state.subgroup
+        },
+        getUserGroupData(state){
+            return state.userGroup
         }
     },
 

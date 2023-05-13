@@ -17,13 +17,13 @@ export const chatStore = {
                 text: 'Hello, Alexandr! My name is David.'
             },
             {
-                id: 1,
+                id: 2,
                 chatRoomId: 1,
                 userGroupId: 2,
                 text: 'Hello, David! How are you?'
             },
             {
-                id: 1,
+                id: 3,
                 chatRoomId: 1,
                 userGroupId: 1,
                 text: 'I am fine! And you?'
@@ -35,13 +35,19 @@ export const chatStore = {
 
     getters: {
         getMessages(state){
-            return state.messages
+            return state.chatRoom.messages
         }
     },
 
     mutations: {
         addMessage(state, new_message){
-            state.messages.push(new_message)
+            console.log(new_message)
+            state.chatRoom.messages.push( {
+                id: state.chatRoom.messages.length,
+                chatRoomId: 1,
+                userGroupId: 1,
+                text: new_message,
+            })
         }
         
     },
