@@ -1,6 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger/dist/decorators";
 import { BelongsToMany, Column, DataType, HasMany, HasOne, Model, Table } from "sequelize-typescript";
-import { User } from "src/users/users.model";
 import { Subgroup } from "./subgroups/subgroups.model";
 import { UserGroup } from "./users-group/users-group.model";
 import { Kanban } from "src/tools/kanban/kanban.model";

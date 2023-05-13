@@ -20,10 +20,6 @@ export default {
 </script>
 
 <style>
-.input-form{
-  /* border-bottom: 2px solid gray;    */
-
-}
 
 .input-task{
   width: 155px !important;

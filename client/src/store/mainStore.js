@@ -8,7 +8,14 @@ export const mainStore = {
             email: '',
             username: '',
         },
+
+        userGroup: {
+            id: 1,
+
+        },
+
         authCheck: false,
+
         token: '',
         subgroups: {
             subGroup: {
@@ -68,6 +75,10 @@ export const mainStore = {
         getGroupData(state) {
             return state.group
         },
+
+        getUserGroupData(state){
+            return state.userGroup
+
         getSubGroupsData(state) {
             return state.group.subGroups
         },

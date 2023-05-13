@@ -5,22 +5,22 @@ import { ChatGateway } from './gateway/chat.gateway';
 import { ChatRoom } from './model/room/room.entity';
 import { RoomService } from './service/room-service/room.service';
 import { ConnectedUserService } from './service/connected-user/connected-user.service';
-import { ConnectedUserEntity } from './model/connected-user/connected-user.entity';
-import { MessageEntity } from './model/message/message.entity';
-import { JoinedRoomEntity } from './model/joined-room/joined-room.entity';
+import { ConnectedUser } from './model/connected-user/connected-user.entity';
+import { Message } from './model/message/message.entity';
+import { JoinedRoom } from './model/joined-room/joined-room.entity';
 import { JoinedRoomService } from './service/joined-room/joined-room.service';
 import { MessageService } from './service/message/message.service';
-import { Sequelize } from 'sequelize';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UserGroup_ChatRoom } from './model/room/userGroup-chatRoom.model';
+import { UsersGroupModule } from 'src/groups/users-group/users-group.module';
 
 @Module({
-  imports: [AuthModule, UsersModule,
+  imports: [AuthModule, UsersModule, UsersGroupModule, 
     SequelizeModule.forFeature([
       ChatRoom,
-      ConnectedUserEntity,
-      MessageEntity,
-      JoinedRoomEntity,
+      ConnectedUser,
+      Message,
+      JoinedRoom,
       UserGroup_ChatRoom,
     ])
   ],
