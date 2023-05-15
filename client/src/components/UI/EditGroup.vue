@@ -33,9 +33,14 @@ export default {
 .edit__content {
     border: 1px white solid;
     margin: 100px auto;
-    width: 454px;
     border-radius: 8px;
     background-color: rgba(17, 17, 17, 1);
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
 }
 
 </style>

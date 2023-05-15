@@ -1,20 +1,31 @@
 <template>
-    <div class="member__card">
+
+    <div class="member__card" 
+    @mouseover="deleteMembersVisible"
+    @mouseout="deleteMemebersUnVisible"
+    >
 
         <div class="member__photo"></div>
 
         <div class="members__content">
 
             <div class="member__name"> 
-                {{ this.member.name }}
+                {{ this.member.username }}
             </div>
 
             <div class="member__role">
                 {{ this.member.role }}
             </div>
-
         </div>
 
+        <div class="button__fon">
+            <my-del-button
+                :method="deleteMembersFromGroup"
+                :params="[member]"
+            > x </my-del-button>
+        </div>
+
+        
 
     </div>
 
@@ -24,17 +35,40 @@
 
 
 <script>
+import { mapMutations } from 'vuex';
+import MyDeliteButton from '@/components/UI/MyDeliteButton.vue'
 export default {
     data() {
         return {
             name: 'member-card',
+            delete__members: false
         }
+    },
+    components:{
+        MyDeliteButton
     },
     props: {
         member: {
             type: Object,
             required: true
             }
+    },
+    methods:{
+        deleteMembersVisible() {
+            this.delete__members = true
+        },
+        deleteMemebersUnVisible() {
+            this.delete__members = false
+        },
+        ...mapMutations({
+            delMembers: 'main/delMembers'
+        }),
+        deleteMembers() {
+            this.delMembers(this.member)
+        },
+        deleteMembersFromGroup() {
+            this.$emit('deleteMembersFromGroup')
+        }
     }
 }
 
@@ -47,20 +81,22 @@ export default {
 .member__card {
 
 position: relative;
-width: 300px;
+width: 280px;
 height: 88px;
 display: flex;
 align-items: center;
+
 background: #131212;
 border-radius: 8px;
 padding-left: 20px;
 margin-bottom: 10px;
 cursor: pointer;
 transition: background 0.3s;
+
 }
 
 .member__card:hover {
-    background: #312e2e;
+    background: #1a1a1a;
 
 }
 
@@ -96,5 +132,14 @@ font-size: 15px;
 line-height: 18px;
 color: #f5cf13;
 }
+
+.button__fon {
+    width: 80%;
+    position: absolute;
+    text-align: end;
+    
+}
+
+
 
 </style>

@@ -1,31 +1,27 @@
 <template>
     <div class="fon">
-
         <div class="img_team" >
-            <nav-bar>
-                
-            </nav-bar>
+            <nav-bar></nav-bar>
             <div class="header_img"> 
-                <h1 class="teamwork">Командная работа лучше вместе с  KADA </h1>
-                <h2 class="be_more">Будьте более продуктивны с нами!</h2>
+                <div class="zagolovki__items">
+                        <h1 class="teamwork">Командная работа лучше вместе с  KADA </h1>
+                        <h2 class="be_more">Будьте более продуктивны с нами!</h2>
+                </div>
+                <my-button
+                @click="$router.push('/create') "
+                > 
+                    <h1 class="create"> создать рабочую группу</h1>
+                </my-button>
             </div>
         </div>
 
         <div class="content">
-            <my-button
-            @click="$router.push('/create') "
-            > 
-                <h1 class="create"> создать рабочую группу</h1>
-            </my-button>
-
             <div class="goals"> 
-                <div class="line"></div>
 
                 <h2 class="our_goals">
-                    наши цели
+                    ПОЧЕМУ МЫ?
                 </h2>
 
-                <div class="line"></div>
             </div>
 
             <div class="three_goals">
@@ -60,22 +56,24 @@
             
         </div>
 
+
         <div class="contact">
 
-            <div class="contact_us">
-                <div class="header_contact"> Связь с нами</div>
-                <div class="david"> @david</div>
-                <div class="sanya"> @sanya</div>
-            </div>
+            <div class="contact__content">
 
-            <div class="social_networks">
-                <div class="social_header"> Социальные сети </div>
-                <div class="vk"> vk</div>
-                <div class="telegram"> telegram</div>
-            </div>
+                <div class="contact_us">
+                    <div class="header_contact"> Связь с нами</div>
+                    <div class="david"> @david</div>
+                    <div class="sanya"> @sanya</div>
+                </div>
 
+                <div class="social_networks">
+                    <div class="social_header"> Социальные сети </div>
+                    <div class="vk"> vk</div>
+                    <div class="telegram"> telegram</div>
+                </div>
+            </div>
         </div>
-
 
     </div>
 
@@ -99,14 +97,11 @@ export default {
 
 
 <style>
-
 .fon {
     min-width: 100%;
     background-color: rgba(17, 17, 17, 1);
-
 }
 
-/*  кнопка  */
 .create {
     font-family: 'Advent Pro';
     font-style: normal;
@@ -118,58 +113,55 @@ export default {
     text-align: center;
     color: #FFFFFF;
 }
-/* imt _team  */
 
 .img_team {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 432px;
-    left: 0px;
-    top: 0px;
     background-image: url("/img/team.png");
+    background-size: 100% 100%;
+    margin-bottom: 100px;
+    height: 430px;
 }
 
 .header_img {
     display: flex;
-    top: 134px;
-    flex-direction: column;
+    text-align: left;
+    flex-direction: row;
     align-items: center;
     position: relative;
+    top: 30%;
+}
+
+.zagolovki__items{
+    max-width: 80%;
 }
 
 .teamwork {
-    width: 1200px;
-    height: 84px;
     font-family: 'Advent Pro';
     font-style: normal;
     font-size: 60px;
-    text-align: center;
+    text-align: left;
     color: #FFFFFF;
+    margin-right: 50px;
 }
 
 .be_more {
-    width: 950px;
-    height: 86px;
     font-family: 'Advent Pro';
     font-style: normal;
     font-size: 50px;
-    text-align: center;
+    text-align: left;
     color: #ffffff;
 }
 
-/* сам контен */
-
 .content {
     color: white;
-    height: 582px;
-    width: 1900px;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    top: 58px;
-
+    margin-bottom: 100px;
 }
 
 .goals {
@@ -177,19 +169,16 @@ export default {
     justify-content: space-between;
     align-items: center;
     position: relative;
-    width: 1440px;
+    max-width: 1440px;
     height: 91px;
-    left: 0px;
-    top: 58px;
-
-}
+    left: 0px;}
 
 .our_goals {
     font-size: 32px;
 }
 
 .line {
-    width: 620px;
+    max-width: 620px;
     height: 0px;
     border: 1px solid #D9D9D9;
     
@@ -197,30 +186,25 @@ export default {
 
 .three_goals {
     position: relative;
-    top: 100px;
+    top: 70px;
     display: flex;
-    justify-content: space-between;
-    width: 1200px;
+    max-width: 1200px;
 }
 .goal {
     display: flex;
     flex-direction: column;
-    width: 335px;
+    max-width: 335px;
     height: 250px;
-    background: #D9D9D9;
+    margin-left: 30px;
+    background: linear-gradient(175.95deg, #D0CBCB 3.31%, rgba(107, 107, 107, 0) 106.39%);
+    border-radius: 8px;
     border-radius: 8px;
     transition: 0.5s;
 
-    
-    -webkit-box-shadow: 4px 4px 19px 4px rgba(255, 255, 255, 0.29);
-    -moz-box-shadow: 4px 4px 19px 4px rgba(255, 255, 255, 0.29);
-    box-shadow: 4px 4px 19px 4px rgba(255, 255, 255, 0.29);
 }
 
 .goal:hover {
-    -webkit-box-shadow: 4px 4px 19px 7px rgba(255, 255, 255, 0.51);
--moz-box-shadow: 4px 4px 19px 7px rgba(255, 255, 255, 0.51);
-box-shadow: 4px 4px 19px 7px rgba(255, 255, 255, 0.51);
+    background-color: rgb(194, 194, 194);
     }
 
 .header {
@@ -239,28 +223,31 @@ box-shadow: 4px 4px 19px 7px rgba(255, 255, 255, 0.51);
     font-size: 16px;
     color: #111111;
     font-weight: 600;
-
 }
 
 /* контакты   */
 
 .contact {
-    position: relative;
     height: 158px;
     left: 0px;
     top: 70px;
+    display: flex;
+    justify-content: center;
     background: #1E1E1E;
 }
 
+.contact__content{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    min-width: 80%;
+}
 .contact_us {
     font-size: 24px;
     color: white;
     position: relative;
-    width: 143px;
+    max-width: 143px;
     height: 122px;
-    left: 446px;
-    top: 15px;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -271,18 +258,67 @@ box-shadow: 4px 4px 19px 7px rgba(255, 255, 255, 0.51);
     display: flex;
     flex-direction: column;
     align-items: center;
-
     font-size: 24px;
     color: white;
+    position: relative;
+    max-width: 224px;
+    top: 15px;
+    height: 70%;
+}
 
-    position: absolute;
-    width: 224px;
-    height: 127px;
-    left: 1317px;
-    top: 30px;
+::-webkit-scrollbar {
+    width: 10px;
+}
 
+::-webkit-scrollbar-track {
+    background-color: #454545;
+}
+::-webkit-scrollbar-thumb {
+    background: rgb(121, 121, 121);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(96, 96, 96);
 
 }
+
+@media screen and (max-device-width: 1600px) {
+    .teamwork {
+        font-size: 40px;
+    }
+
+    .be_more {
+        font-size: 40px;
+    }
+
+    .create {
+        font-size: 20px;
+    }
+
+    .goal {
+        width: 300px;
+        height: 220px;
+    }
+
+    .three_goals {
+        top: 50px;
+    }
+
+
+    .header {
+        font-size: 22px;
+        top: 15px;
+    }
+
+    .description {
+        font-size: 14px;
+        top: 20px;
+    }
+
+    .img_team {
+        height: 330px;
+    }
+}
+
 
 
 </style>

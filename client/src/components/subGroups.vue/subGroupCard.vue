@@ -13,12 +13,22 @@
 
         </div>
 
+        
+        <div class="button__fon">
+            <my-del-button
+                :method="deleteMSubGroupFromGroup"
+                :params="[subGroup]"
+            > x </my-del-button>
+        </div>
+
     </div>
 
 </template>
 
 
 <script>
+import { mapMutations } from 'vuex';
+
 export default {
     data() {
         return {
@@ -29,6 +39,11 @@ export default {
         subGroup: {
             type: Object,
             required: true
+        }
+    },
+    methods:{
+        deleteMSubGroupFromGroup() {
+            this.$emit('deleteMSubGroupFromGroup')
         }
     }
 
@@ -43,7 +58,7 @@ export default {
 .subGroup__card {
 
 position: relative;
-width: 300px;
+width: 280px;
 height: 88px;
 display: flex;
 align-items: center;
@@ -56,7 +71,7 @@ transition: background 0.3s;
 }
 
 .subGroup__card:hover {
-    background: #312e2e;
+    background: #1a1a1a;
 
 }
 

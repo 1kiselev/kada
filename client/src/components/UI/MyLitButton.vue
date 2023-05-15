@@ -1,5 +1,6 @@
 <template>
     <button 
+    type="submit"
     @click="foo(method, params)" 
     class="btn_lit">
         <slot></slot>
@@ -37,20 +38,17 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    
     height: 43px;
-    
     background: #000000;
     border: 1px solid #ffffff;
     border-radius: 8px;
     transition: 0.3s;
     cursor: pointer;
     color: white;
-    
     margin-top: 53px;
     font-weight: 600;
     font-size: 20px;
-    width: 400px;
+    width: 85%;
 }
 
 .btn_lit:hover {

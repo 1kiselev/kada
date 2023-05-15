@@ -3,9 +3,10 @@
     
         <div class="subGroup_list_content">
             <subGroup-card
-            v-for="subGroup in subGroups"
+            v-for="(subGroup, index) in subGroups"
             :subGroup="subGroup"
             :key="subGroup.name"
+            @deleteMSubGroupFromGroup="deleteMSubGroupFromGroup(index)"
             ></subGroup-card>
         </div>
     </div>
@@ -13,7 +14,8 @@
     
     <script>
 
-  import subGroupCard from './subGroupCard.vue';
+  import { mapActions } from 'vuex';
+import subGroupCard from './subGroupCard.vue';
     
     export default {
         data() {
@@ -30,6 +32,14 @@
                 required: true
             }
         },
+        methods:{
+            ...mapActions({
+                DELETE_SUBGROUP: 'main/DELETE_SUBGROUP'
+            }),
+            deleteMSubGroupFromGroup(index) {
+                this.DELETE_SUBGROUP(index)
+            }
+        }
     }
     
     
@@ -40,7 +50,6 @@
     <style>
     .subGroup__list {
         width: 353px;
-        height: 699px;
         display: flex;
         justify-content: center;
     }

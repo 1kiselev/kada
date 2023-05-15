@@ -4,10 +4,6 @@
     </div>
 </template>
 
-
-
-
-
 <script>
 export default {
     name: 'my-input',
@@ -20,17 +16,14 @@ export default {
         }
     }
 }
-
 </script>
 
 
-
 <style>
-
 .input__create {
     width: 238px;
     height: 37px;
-    background: #D9D9D9;
+    background: #515151;
     outline: none;
     border: none;
     border-bottom: 2px solid gray;
@@ -38,7 +31,7 @@ export default {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     padding-left: 10px;
     transition: 0.4s;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     border-radius: 8px;
 }
 
@@ -47,6 +40,10 @@ export default {
     opacity: 0.5;
 }
 
-
+@media screen and (max-width: 1600px) {
+    .input__create {
+        width: 150px;
+        height: 30px;
+    }    
+}
 </style>
-

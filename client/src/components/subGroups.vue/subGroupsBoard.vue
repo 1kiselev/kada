@@ -1,6 +1,6 @@
 <template>
 
-    <div class="subGroups__Board" v-show="show">
+    <div class="subGroups__Board">
         <div class="subGroups__content" >
             <subGroupsList
             :subGroups="subGroups"
@@ -51,7 +51,6 @@
     
 .subGroups__Board {
     width: 353px;
-    height: 699px;
     display: flex;
     justify-content: center;
     padding-top: 20px;

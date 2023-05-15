@@ -8,15 +8,11 @@
         >
             KADA
         </div>
-
             <div class="login_registr">
-
                 <div class="hi__user"> Hi,  {{ this.user.username }} !</div>
-
                 <div class="my_groups_my_projects">
                 Мои группы
                 </div>
-
                     <div class="login"
                     v-if="authCheck == false"
                     @click="showLogin"
@@ -82,12 +78,6 @@ export default {
             getUserData: 'main/getUserData'
         }),
     },
-    props: {
-        authCheck: {
-            type: Boolean,
-            requred: true
-        }
-    },
    
 }
 
@@ -100,7 +90,8 @@ export default {
     align-items: center;
     justify-content: space-between;
     height: 100px;
-    width: 1366px;
+    width: 80%;
+    max-width: 80%;
 }
 
 .kada {
@@ -135,7 +126,7 @@ export default {
     font-weight: 400;
     line-height: 33px;
     text-align: center;
-    color: #f5cf13;
+    color: #ffffff;
     transition: color 0.3s;
 }
 
@@ -150,16 +141,16 @@ export default {
     font-weight: 400;
     line-height: 33px;
     text-align: center;
-    color: #FFFFFF;
+    color: #ffffff;
     cursor: pointer;
     transition:  0.3s;
-    background-color: rgb(70, 70, 70);
-    width: 150px;
+    background-color: #3a3a3a;
+    width: 8em;
     border-radius: 8px;
 }
 
 .registration:hover {
-    background: rgb(34, 34, 34);
+    background-color: #1c1c1c;
 }
 
 .my_groups_my_projects {
@@ -175,5 +166,23 @@ export default {
 .my_groups_my_projects:hover {
     color: #bbbbbb;
 } 
+
+@media screen and (max-width: 1600px) {
+    .kada {
+        font-size: 40px;
+    }
+
+    .login_registr {
+        font-size: 16px;
+    }
+
+    .login {
+        margin-left: 40px;
+    }
+
+    .registration {
+        margin-left: 15px;
+    }
+}
 
 </style>

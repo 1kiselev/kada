@@ -61,9 +61,6 @@ export default {
 }
 
 
-    font-size: large;
-    margin: 10px;
-}
 
 .status{
 
