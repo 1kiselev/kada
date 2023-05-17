@@ -1,28 +1,37 @@
-import { UserEntity } from "src/user/model/user.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { RoomEntity } from "../room/room.entity";
+import { ChatRoom} from "../room/room.entity";
+import { Model, Column, DataType, ForeignKey, Table } from "sequelize-typescript";
+import { UserGroup } from "src/groups/users-group/users-group.model";
 
-@Entity()
-export class MessageEntity {
+interface MessageCreationAttrs {
+  id: number;
+  text: string;
+  userGroupId: number;
+  chatRoomId: number;
+}
 
-  @PrimaryGeneratedColumn()
+
+@Table({tableName: 'messages'})
+export class Message extends Model<Message, MessageCreationAttrs> {
+
+  @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
   id: number;
 
-  @Column()
+  @Column({type: DataType.STRING})
   text: string;
 
-  @ManyToOne(() => UserEntity, user => user.messages)
-  @JoinColumn()
-  user: UserEntity;
+  // @ManyToOne(() => UserEntity, user => user.messages)
+  // @JoinColumn()
+  // user: UserEntity;
 
-  @ManyToOne(() => RoomEntity, room => room.messages)
-  @JoinTable()
-  room: RoomEntity;
+  // @ManyToOne(() => RoomEntity, room => room.messages)
+  // @JoinTable()
+  // room: RoomEntity;
 
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
+  @ForeignKey(() => UserGroup)
+  @Column({type: DataType.INTEGER})
+  userGroupId: number;
   
+  @ForeignKey(() => ChatRoom)
+  @Column({type: DataType.INTEGER})
+  chatRoomId: number;
 }

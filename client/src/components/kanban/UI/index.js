@@ -1,5 +1,5 @@
-import InputForm from '@/components/kanban/UI/InputForm.vue'
-import MySpan from '@/components/kanban/UI/MySpan.vue'
+import InputForm from './InputForm'
+import MySpan from './MySpan'
 
 export default [
     InputForm, 
