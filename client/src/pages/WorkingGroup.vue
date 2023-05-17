@@ -11,39 +11,48 @@
         <div class="header__space">
 
             <div class="left__header__block">
-            <h1 class="header__working_group"> Рабочая группа</h1>
+                <h1 class="header__working_group"> Рабочая группа</h1>
 
-            <div class="name__of__group"> {{ this.group.name }} </div>
-        </div>
+                <div class="name__of__group"> {{ this.groupData.name }} </div>
+            </div>
+
             <div class="settings__icon"
-            @click="editWindowVisible"
+                @click="this.editWindowVisible"
             ></div>
 
-            <edit-group v-model:show="editVissible">
-                <edit-form></edit-form>
+            <edit-group v-model:show="this.editVissible">
+                <edit-form
+                :groupData="this.groupData"
+                ></edit-form>
             </edit-group>
-
-            
-
         </div>
 
         <div class="content__working_page">
 
-
-        
             <div class="left__panel">
 
-                <div class="tabs">
+                <div class="tabs" id="left__tabs">
 
-                <div class="left__categories">
+                    <nav class="tabs__items">
+                        <a href="#tab_01" class="tabs__item"> Участники</a>
+                        <a href="#tab_02" class="tabs__item"> Подгруппы</a>
+                        <a href="#tab_03" class="tabs__item"> Чат</a>
+                    </nav>
 
+                    
+                    <div class="tabs__body">
+                        <div id="tab_01" class="tabs__block"> 
+                            <div class="add__members__div">  <add-members-form></add-members-form> </div>
+                            <div id="tab_01" class="no__members" v-if="getMembersLength == 0" > В группе пока нет ни одного участника :/ </div>
+                            <members-board v-if="getMembersLength != 0"></members-board>
+                        </div>
+                        <div id="tab_02" class="tabs__block"> 
+                            <div class="add_subgroups__div"> <add-subgroups-form></add-subgroups-form> </div>
+                                <div id="tab_02" class="no__members" v-if="getSubGroupsLength == 0" > В группе пока нет ни одной подгруппы :/ </div>
+                                <sub-groups-board v-if="getSubGroupsLength != 0"></sub-groups-board  > </div>
+                            <div id="tab_03" class="tabls__block"></div>
+                        </div>
                 </div>
-            </div>
-                <members-board :show="boardVisible"></members-board>
-
-                <sub-groups-board :show="subGroupsBoardVisible"></sub-groups-board>
-
-
             </div>
 
             <div class="roadmap">
@@ -86,14 +95,14 @@ import EditGroup from "@/components/UI/EditGroup.vue";
 import EditForm from "@/components/EditForm.vue";
 import membersBoard from "@/components/members/membersBoard.vue";
 import subGroupsBoard from "@/components/subGroups.vue/subGroupsBoard.vue";
+import AddMembersForm from "@/components/AddMembersForm.vue";
+import AddSubgroupsForm from "@/components/AddSubgroupsForm.vue";
 
 export default {
     data() {
         return {    
             editVissible: false,
-            group: this.getGroupData(),
-            boardVisible: false,
-            subGroupsBoardVisible: false
+            groupData: this.getGroupData()
     }
     },
     components: {
@@ -102,35 +111,30 @@ export default {
         EditGroup,
         EditForm,
         membersBoard,
-        subGroupsBoard
+        subGroupsBoard,
         CreateTaskModal,
+        AddMembersForm,
+        AddSubgroupsForm
         ChatField,
     },
     methods: {
         ...mapMutations({
             setUserData: 'main/setUserData',
         }),
-        ...mapMutations({
-            setGroupData: 'main/setGroupData'
+        ...mapGetters({
+            getMembers: 'main/getMembers',
+            getGroupData: 'main/getGroupData',
+            getSubGroupsData: 'main/getSubGroupsData',
+            getMembersLength: 'main/getMembersLength',
+            getSubGroupsLength: 'main/getSubGroupsLength'
         }),
         editWindowVisible() {
             this.editVissible = true
         },
-        ...mapGetters({
-            getGroupData: 'main/getGroupData',
-        }),
-        showBoard() {
-            this.boardVisible = true
-        },
-        showSubGroupsBoard() {
-            this.subGroupsBoardVisible = true
+        showAddForm() {
+            this.addFormVisible = true
         }
-    },
-    // mounted: {
-    //     ...mapGetters({
-    //         getGroupData: 'main/getGroupData'
-    //     })
-    // },
+    }
 }
 
 
@@ -172,13 +176,12 @@ export default {
 
 .left__header__block {
     display: flex;
-    justify-content: space-between;
     align-items:end;
-    width: 400px;
 }
 
 .header__working_group {
     color: white;
+    margin-right: 55px;
 }
 
 .name__of__group {
@@ -189,14 +192,39 @@ export default {
 .left__panel {
     position: relative;
     width: 353px;
-    height: 699px;
+    height: 710px;
     left: 20px;
     top: 40px;
     border: 4px solid black;
     background: rgba(217, 217, 217, 0.1);
 }
 
-.left__categories {
+.tabs__body {
+    height: 685px;
+    width: 353px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.tabs__body::-webkit-scrollbar {
+    width: 10px;
+}
+
+.tabs__body::-webkit-scrollbar-track {
+    background-color: #454545;
+}
+
+
+.tabs__body::-webkit-scrollbar-thumb {
+    background: rgb(121, 121, 121);
+}
+
+.tabs__body::-webkit-scrollbar-thumb:hover {
+    background: rgb(96, 96, 96);
+
+}
+
+.tabs__items {
     display: flex;
     justify-content: space-around;
     width: 100%;
@@ -205,6 +233,51 @@ export default {
     color: white;
 }
 
+.tabs__item {
+    position: relative;
+    background: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.5s;
+    text-decoration: none;
+}
+
+
+.tabs__block {
+    display: none;
+}
+
+.tabs__block:target{
+    display: block;
+}
+
+.tabs__block:before {
+    content: "";
+    width: 67px;
+    height: 25px;
+    position: absolute;
+    left: 30px;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.tabs__block:nth-child(1):before {
+    background-color: orange;
+    position: absolute;
+
+}
+
+.tabs__block:nth-child(2):before {
+    background-color: orange;
+    left: 163px;
+}
+
+.add__members__div{
+    display: flex;
+    justify-content: center;
+}
 .button__categories {
     background: none;
     color: white;
@@ -215,8 +288,22 @@ export default {
 }
 
 .button__categories:focus {
-    color: yellow;
+    color: #f5cf13;
     text-decoration: underline
+}
+
+
+
+.add__members:hover {
+    background: #9e9e9e;
+
+}
+
+.no__members {
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 100px;
 }
 
 .content__working_page {

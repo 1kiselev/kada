@@ -1,11 +1,8 @@
 <template>
-  <div class="kanban-column"
-        >
-    <div class="bar" 
-        :class="this.status"
-    >
-        {{ this.name }}
-    </div>
+    <div class="kanban-column">
+        <div class="bar" :class="this.status">
+            {{ this.name }}
+        </div>
         <kanban-card
             v-for="task in actualCards"
             :key="task.name"
@@ -15,7 +12,7 @@
             draggable="true"
         ></kanban-card>
     </div>
-  </div>
+
 </template>
 
 <script>

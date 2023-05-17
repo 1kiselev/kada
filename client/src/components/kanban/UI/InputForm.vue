@@ -1,5 +1,5 @@
 <template>
-  <div class="input-form">
+  <div class="input_form">
     <input :value="modelValue" @input="updateInput" class="input input-task">
   </div>
 </template>
@@ -20,6 +20,10 @@ export default {
 </script>
 
 <style>
+.input_form{
+   border-bottom: 2px solid gray;    
+
+}
 
 .input-task{
   width: 155px !important;

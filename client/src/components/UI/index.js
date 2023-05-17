@@ -3,6 +3,7 @@ import MyLogin from "@/components/UI/MyLogin";
 import MyRegistr from "@/components/UI/MyRegistr";
 import MyInput from "@/components/UI/MyInput";
 import MyLitButton from "@/components/UI/MyLitButton";
+import MyDeliteButton from "@/components/UI/MyDeliteButton.vue"
 
 export default [
     MyButton,
@@ -10,4 +11,5 @@ export default [
     MyRegistr,
     MyInput,
     MyLitButton,
+    MyDeliteButton
 ]

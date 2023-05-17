@@ -33,10 +33,18 @@ export default {
 
     .login_content {
         border: 1px white solid;
-        margin: 200px auto;
+        margin: 10% auto;
+        padding: 10px;
         width: 454px;
         border-radius: 8px;
         background-color: rgba(17, 17, 17, 1);
+    }
+
+    @media screen and (max-width: 1600px) {
+        .login_content {
+            width: 400px;
+            border: 0.5px white solid;
+        }
     }
 
 </style>

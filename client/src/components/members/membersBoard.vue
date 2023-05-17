@@ -1,16 +1,9 @@
 <template>
 
-
-<div class="members__Board" v-show="show">
+<div class="members__Board">
     <div class="members__content" >
-        <members-list
-        :members="members"
-        >
-        </members-list>
-
+        <members-list></members-list>
     </div>
-
-
 </div>
 
 </template>
@@ -33,12 +26,6 @@ export default {
     components: {
         membersList
     },
-    props: {
-        show: {
-            type: Boolean,
-            default: false,
-        }
-    },
 
     methods: {
         ...mapGetters({
@@ -59,11 +46,9 @@ export default {
 
 .members__Board {
 width: 353px;
-height: 699px;
 display: flex;
 justify-content: center;
 padding-top: 20px;
-
 }
 
 

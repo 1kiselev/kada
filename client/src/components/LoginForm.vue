@@ -4,7 +4,7 @@
     <div class="login_window">
 
         <div class="title_login"
-        style="font-size: 28px;font-weight: 600;margin-bottom: 51px;"
+        style="font-size: 150%;font-weight: 600;margin-bottom: 51px;"
         >
                 Вход
         </div>
@@ -54,7 +54,7 @@
         </div>
 
         <my-lit-button
-        style="margin-top: 47px; font-weight: 600; font-size: 20px; width: 400px;"
+        style="margin-top: 47px; font-weight: 600; font-size: 20px;;"
         type="submit"
         :method="login"
         :params="state.userDataLogin"
@@ -143,23 +143,20 @@ export default {
 }
 
 .login_header {
-    width: 375px;
+    width: 80%;
     height: 13px;
-    left: calc(50% - 113px/2 - 126.5px);
-
     font-family: 'Advent Pro';
     font-style: normal;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 80%;
     line-height: 19px;
-
     color: #FFFFFF;
 }
 
 .no_account {
     display: flex;
-    font-size: 15px;
-    width: 375px;
+    font-size: 80%;
+    width: 80%;
 
 }
 
@@ -173,5 +170,6 @@ export default {
     display: flex;
     justify-content: space-between;
 }
+
 </style>
 

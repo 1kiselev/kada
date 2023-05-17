@@ -8,39 +8,21 @@ export const mainStore = {
             email: '',
             username: '',
         },
-
         userGroup: {
             id: 1,
 
         },
-
         authCheck: false,
-
         token: '',
-        subgroups: {
-            subGroup: {
-                name: 'mySubGorup',
-                members: [],
-                task: 'do a new work',
-            }
-        },
         group: {
             id: '',
             name: '',
             description: '',
             members: [
                 {
-                    name: 'Qstone 433',
-                    role: 'goest'
-                },
-                {
-                    name: 'Alex',
-                    role: 'admin'
-
-                },
-                {
-                    name: 'Jhon',
-                    role: 'goest'
+                    id: '',
+                    email: '',
+                    username: 'qstone',
 
                 }
             ],
@@ -49,16 +31,6 @@ export const mainStore = {
                     name: 'mySubGorup',
                     members: [],
                     task: 'do a new work',
-                },
-                {
-                    name: 'mySubGorup1',
-                    members: [],
-                    task: 'do a new work1',
-                },
-                {
-                    name: 'mySubGorup2',
-                    members: [],
-                    task: 'do a new work2',
                 }
             ]
         }
@@ -82,8 +54,14 @@ export const mainStore = {
         getSubGroupsData(state) {
             return state.group.subGroups
         },
+        getSubGroupsLength(state) {
+            return state.subGroups.length
+        },
         getMembers(state) {
             return state.group.members
+        },
+        getMembersLength(state) {
+            return state.group.members.length
         },
         authCheck: state => {
             return ('username' in state.user) ? true : false;
@@ -112,14 +90,26 @@ export const mainStore = {
             state.group.name = groupData.name
             state.group.description = groupData.description
         },
-        setGroupMembers(state, members){
+        updateMembersGroup(state, members){
             state.group.members = members
         },
-
         setSubGroupData(state, subgroupData) {
             state.subgroup.name = subgroupData.name
             state.subgroup.members = subgroupData.members
             state.subgroup.task = subgroupData.task
+        },
+        addNewMembers:(state, newMember) => {
+            state.group.members.push(newMember)
+        },
+        delMembers:(state, index,) => {
+            state.group.members.splice(index, 1)
+
+        },
+        addNewSubgroups:(state, newSubgroups) => {
+            state.group.subGroups.push(newSubgroups)
+        },
+        delSubgroups:(state, index) => {
+            state.group.subGroups.splice(index, 1)
         }
         
     },
@@ -144,7 +134,6 @@ export const mainStore = {
                 const response = await axios.post('auth/login', {
                     email: data.email,
                     password: data.password,
-                    authCheck: true,
                 })
                 localStorage.setItem('token', response.data.token)
                 commit('setUserData', { email: data.email, username: response.data.username })
@@ -154,31 +143,48 @@ export const mainStore = {
             }
         },
 
-        async createGroup({state, commit}) {
-            try {
-                const response = await axios.post('groups', {
-                    name: state.group.name,
-                    description: state.group.description,
-                    creator: state.user.email
+        // async createGroup({state, commit},data)  {
+        //     try {
+        //         const response = await axios.post('groups', {
+        //             name: state.group.name,
+        //             description: state.group.description,
+        //             creator: state.user.email
+        //         })
+        //         console.log(response.data)
+        //         commit('setGroupData', response.data.group)
+        //         commit('updateMembersGroup', response.data.members)
+        //         console.log('Успешно')
+        //     } catch (error) {
+        //         console.log(error)
+        //     }
+        // },
+        async get_members({state, commit}, data) {
+            try{
+                await axios.get('', {
+                    id: state.group.id,
                 })
-                console.log(response.data)
-                commit('setGroupData', response.data.group)
-                commit('setGroupMembers', response.data.members)
-                console.log('Успешно')
+                console.log(respons)
+                commit('setGroupData', response.data)
             } catch (error) {
                 console.log(error)
             }
         },
-        async get_members_from_API({state, commit}) {
+        async ADD_MEMBER_GROUP({commit, state}, newMember) {
             try{
-                const response = await axios.get('create/group', {
-                    members: state.group.members,
+                const response = await axios.post('groups/addUser', {
+                    user_email: newMember,
+                    group_id: state.group.id
                 })
-                commit('setGroupData', response.data.members)
-                console.log('Успешно')
+                commit('updateMembersGroup', response.data.members)
             } catch (error) {
                 console.log(error)
             }
+        },
+        DELETE_MEMBER_GROUP({commit}, index) {
+            commit('delMembers', index)
+        },
+        DELETE_SUBGROUP({commit}, index) {
+            commit('delSubgroups', index)
         }
     },
 

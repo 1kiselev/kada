@@ -27,8 +27,14 @@ export default {
 
 <style>
 
+.form__login {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .input {
-    width: 375px;
+    width: 80%;
     height: 49px;
     background: transparent;
     outline: none;
@@ -50,6 +56,8 @@ export default {
     opacity: 0.5;
 }
 
+@media screen and (min-device-width: 1600px) {
 
+}
 </style>
 

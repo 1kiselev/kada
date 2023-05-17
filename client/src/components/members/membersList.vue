@@ -3,11 +3,11 @@
 
     <div class="members_list_content">
         <memberCard
-        v-for="member in members"
+        v-for="(member, index) in actualMembers"
         :member="member"
-        :key="member.name"
+        :key="member.username"
+        @deleteMembersFromGroup="deleteMembersFromGroup(index)"
         >
-
         </memberCard>
     </div>
 </div>
@@ -15,17 +15,34 @@
 
 <script>
 import memberCard from './memberCard.vue';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
     components: {
         memberCard
     },
-    props: {
-        members: {
-            type: Object,
-            required: true
-        }
+    methods:{
+        ...mapActions ({
+        ADD_MEMBER_GROUP: 'main/ADD_MEMBER_GROUP',
+        DELETE_MEMBER_GROUP: 'main/DELETE_MEMBER_GROUP'
+    }),
+    ...mapGetters({
+        getMembers: 'main/getMembers'
+    }) ,    
+    // addNewMembers(members) {
+    //     this.ADD_MEMBER_GROUP(members)
+    // }
+    deleteMembersFromGroup(index) {
+        this.DELETE_MEMBER_GROUP(index)
+    }
     },
+
+    computed:{
+        actualMembers() {
+            console.log('work')
+            return this.getMembers()
+        }
+    }
 }
 
 
@@ -36,7 +53,6 @@ export default {
 <style>
 .members__list {
     width: 353px;
-    height: 699px;
     display: flex;
     justify-content: center;
 }
