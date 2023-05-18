@@ -1,7 +1,5 @@
 <template>
-
     <div class="navbar">
-
         <div class="kada"
         style="cursor:pointer"
         @click="$router.push('/') "
@@ -26,8 +24,6 @@
                         Создать аккаунт 
                     </div>
             </div>
-
-
         <my-login v-model:show="LoginVisible">
             <login-form/>
         </my-login>
@@ -35,8 +31,6 @@
         <my-registr v-model:show="RegistrVisible">
             <registr-form/>
         </my-registr>
-        
-
     </div>
 
 
@@ -47,6 +41,7 @@ import MyLogin from './UI/MyLogin.vue';
 import LoginForm from './LoginForm.vue';
 import MyRegistr from './UI/MyRegistr.vue';
 import RegistrForm from './RegistrForm.vue';
+import toggleMixin from '@/mixins/toggleMixin';
 import { mapGetters } from 'vuex';
 
 
@@ -57,22 +52,14 @@ export default {
         MyRegistr,
         RegistrForm,
     },
+    mixins: [toggleMixin],
     data() {
         return {
-            LoginVisible: false,
-            RegistrVisible: false,
             authCheck: false,
             user: this.getUserData(),
         }
     },
     methods: {
-        showLogin() {
-            this.LoginVisible = true;
-
-        },
-        showRegistr() {
-            this.RegistrVisible = true;
-        },
         ...mapGetters ({
             authCheck: 'main/authCheck',
             getUserData: 'main/getUserData'

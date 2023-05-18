@@ -26,7 +26,6 @@ export default {
 
 
 <style>
-
 .form__login {
     width: 100%;
     display: flex;

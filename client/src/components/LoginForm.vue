@@ -8,7 +8,7 @@
         >
                 Вход
         </div>
-        <h1 class="login_header"> Введите ваш Email </h1>
+        <h1 class="login_header"> Email </h1>
         <my-input
         @blur="v$.email.$touch()"
         placeholder="Email"
@@ -24,7 +24,7 @@
         </span>
         <h1 class="login_header"
         style="margin-top: 21px;"
-        > Введите ваш пароль </h1>
+        > Пароль </h1>
 
         <my-input
         type="password"
@@ -43,14 +43,15 @@
 
         <div class="no_account">
 
-            <h3 class="no_acc">
+            <div class="no-bootstrap">
                 Нет аккаунта?
-            </h3>
+            </div>
 
-            <h3 class="create_acc"
+            <div class="create_acc"
+            @click="showRegistr"
             style="margin-left: 40px; cursor: pointer;">
                 Создать аккаунт
-            </h3>
+        </div>
         </div>
 
         <my-lit-button
@@ -76,12 +77,14 @@ import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 import { reactive } from 'vue';
 import { mapMutations, mapActions} from 'vuex';
+import toggleMixin from '@/mixins/toggleMixin';
 
 export default {
     components: {
         MyInput,
         MyLitButton,
     },
+    mixins: [toggleMixin],
     setup() {
         const state = reactive( {
             userData: {
