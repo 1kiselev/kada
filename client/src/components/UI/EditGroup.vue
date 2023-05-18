@@ -15,6 +15,7 @@ export default {
     name: 'edit-group',
     mixins: [toogleMixin],
 }
+    
 </script>
 
 

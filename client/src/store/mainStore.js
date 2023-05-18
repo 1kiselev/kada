@@ -20,7 +20,7 @@ export const mainStore = {
             description: '',
             members: [
                 {
-                    id: '',
+                    // id: '',
                     email: '',
                     username: 'qstone',
 
@@ -50,7 +50,7 @@ export const mainStore = {
 
         getUserGroupData(state){
             return state.userGroup
-
+        },
         getSubGroupsData(state) {
             return state.group.subGroups
         },
@@ -89,6 +89,7 @@ export const mainStore = {
         setGroupData(state, groupData) {
             state.group.name = groupData.name
             state.group.description = groupData.description
+            state.group.id = groupData.id
         },
         updateMembersGroup(state, members){
             state.group.members = members
@@ -143,21 +144,23 @@ export const mainStore = {
             }
         },
 
-        // async createGroup({state, commit},data)  {
-        //     try {
-        //         const response = await axios.post('groups', {
-        //             name: state.group.name,
-        //             description: state.group.description,
-        //             creator: state.user.email
-        //         })
-        //         console.log(response.data)
-        //         commit('setGroupData', response.data.group)
-        //         commit('updateMembersGroup', response.data.members)
-        //         console.log('Успешно')
-        //     } catch (error) {
-        //         console.log(error)
-        //     }
-        // },
+        async createGroup({state, commit}, data)  {
+            console.log(data)
+            try {
+                const response = await axios.post('groups', {
+                    name: data.name,
+                    description: data.description,
+                    creator: state.user.email
+                })
+                console.log(response.data)
+                commit('setGroupData', response.data.group)
+                commit('updateMembersGroup', response.data.members.rows)
+                console.log('Успешно')
+            } catch (error) {
+                console.log(error)
+            }
+        },
+
         async get_members({state, commit}, data) {
             try{
                 await axios.get('', {
@@ -175,7 +178,8 @@ export const mainStore = {
                     user_email: newMember,
                     group_id: state.group.id
                 })
-                commit('updateMembersGroup', response.data.members)
+                console.log(response)
+                commit('updateMembersGroup', response.data.rows)
             } catch (error) {
                 console.log(error)
             }

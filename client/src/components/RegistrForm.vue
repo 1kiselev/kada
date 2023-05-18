@@ -94,7 +94,7 @@
         <my-lit-button
             type="submit"
             :method="registrate"
-            :params="state.userData"
+            :params="[state.userData]"
             
         > 
             Принять

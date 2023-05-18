@@ -21,6 +21,7 @@
             }
          
         },
+        
         methods: {
             foo(method, params){
                 console.log(params)

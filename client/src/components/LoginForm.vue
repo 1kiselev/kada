@@ -12,7 +12,7 @@
         <my-input
         @blur="v$.email.$touch()"
         placeholder="Email"
-        v-model="state.userDataLogin.email" type="email"
+        v-model="state.userData.email" type="email"
         id="email"
         style="
         margin-top: 12px;"
@@ -30,7 +30,7 @@
         type="password"
         @blur="v$.password.$touch()"
         placeholder="Пароль "
-        v-model="state.userDataLogin.password"
+        v-model="state.userData.password"
         id="password"
         style="margin-top: 12px;"
         />
@@ -57,7 +57,7 @@
         style="margin-top: 47px; font-weight: 600; font-size: 20px;;"
         type="submit"
         :method="login"
-        :params="state.userDataLogin"
+        :params="[state.userData]"
         > 
             Принять
         </my-lit-button>
@@ -84,7 +84,7 @@ export default {
     },
     setup() {
         const state = reactive( {
-            userDataLogin: {
+            userData: {
                 email: '',
                 password: ''
         }})

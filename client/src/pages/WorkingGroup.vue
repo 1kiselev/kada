@@ -65,8 +65,8 @@
                     </div>
                 </div>
 
-                <!-- <kanban-board></kanban-board> -->
-                <chat-field></chat-field>
+                <kanban-board></kanban-board>
+                <!-- <chat-field></chat-field> -->
                 <!-- <div class="roadmap__content">
                     
                 </div> -->
@@ -114,7 +114,7 @@ export default {
         subGroupsBoard,
         CreateTaskModal,
         AddMembersForm,
-        AddSubgroupsForm
+        AddSubgroupsForm,
         ChatField,
     },
     methods: {

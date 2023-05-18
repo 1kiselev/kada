@@ -51,8 +51,8 @@ export class GroupsService {
             const value = "MEMBER"
             const userGroup = await this.userGroupService.createUserGroup({ user_email, group_id})
             const user_group_id = userGroup.id
-            this.addRole({ value, user_group_id })
-            return this.getGroupUsers(dto.group_id);
+            await this.addRole({ value, user_group_id })
+            return await this.getGroupUsers(dto.group_id);
         }
         throw new HttpException('Пользователь или группа не найдены', HttpStatus.NOT_FOUND);
     }

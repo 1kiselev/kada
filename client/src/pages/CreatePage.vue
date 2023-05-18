@@ -46,7 +46,7 @@
                         <div class="little_h"> Название группы</div>
                        <my-create-input  
                        @blur="v$.name.$touch()"
-                        v-model="state.create.name"
+                        v-model="state.groupData.name"
                        ></my-create-input>
                         <span v-if="v$.name.$error" style="color:red; display: flex">
                             {{ 'Это обязательное поле!' }}
@@ -56,7 +56,7 @@
 
                     <div class="link">
                         <div class="little_h"> Ссылка для приглашения </div>
-                        <my-input-link v-model="state.create.link_group"  readonly></my-input-link>
+                        <my-input-link v-model="state.groupData.link_group"  readonly></my-input-link>
                     </div>
                     <button class="copy__button" @click="copy"> copy link </button>
                 </div>
@@ -67,7 +67,7 @@
                     </div>
 
                     <textarea
-                    v-model="state.create.description"
+                    v-model="state.groupData.description"
                     class="text_desc">
                     </textarea>
 
@@ -108,7 +108,7 @@ export default {
     },
     setup() {
         const state = reactive ({
-            create: {
+            groupData: {
                 // avatar: '',
                 name: '',
                 link_group: 'link//:0101010',
@@ -137,8 +137,9 @@ export default {
             createGroup: 'main/createGroup',
         }),
         create(){
-            this.setGroupData(this.state.create)
-            // this.createGroup()
+            // this.setGroupData(this.state.create)
+            // console.log(this.groupData, '!11')
+            this.createGroup(this.state.groupData)
             this.$router.push('/working_group') 
             console.log('here')
         },

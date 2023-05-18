@@ -56,8 +56,13 @@ export default {
         ...mapMutations({
             addNewMemebers: 'main/addNewMembers',
         }),
+        ...mapActions({
+            ADD_MEMBER_GROUP: 'main/ADD_MEMBER_GROUP'
+        })
+        ,
         compliteAdd() {
-            this.addNewMemebers(this.members),
+            // this.addNewMemebers(this.members),
+            this.ADD_MEMBER_GROUP(this.members.username)
             this.members = {
                 id: '',
                 email: '',
