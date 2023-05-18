@@ -200,7 +200,7 @@ export default {
     border-radius: 8px;
     border-radius: 8px;
     transition: 0.5s;
-
+    line-height: normal;
 }
 
 .goal:hover {
@@ -234,6 +234,7 @@ export default {
     display: flex;
     justify-content: center;
     background: #1E1E1E;
+    line-height: normal;
 }
 
 .contact__content{

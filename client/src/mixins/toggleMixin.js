@@ -1,4 +1,10 @@
 export default {
+    data() {
+        return {
+            RegistrVisible: false,
+            LoginVisible: false,
+        }
+    },
     props: {
         show: {
             type: Boolean,
@@ -9,9 +15,11 @@ export default {
         hideDialog(){
             this.$emit('update:show', false)
         },
-    },
-    mounted(){
-
-    }
-    
+        showRegistr() {
+            this.RegistrVisible = true;
+        },
+        showLogin() {
+            this.LoginVisible = true;
+    },    
+}
 }

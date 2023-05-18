@@ -9,11 +9,11 @@
                 Регистрация
         </div>
 
-        <h1 class="registr__header"> Введите ваше имя</h1>
+        <h1 class="registr__header"> Имя</h1>
         <my-input
             @blur="v$.username.$touch()"
-            :class="{'is-invalid': v$.username.$error}"
             v-model="state.userData.username"
+            required
             type="text"
             style="margin-top: 7px;"
         />
@@ -26,14 +26,15 @@
 
         <h1 class="registr__header"
         style="margin-top: 21px;"
-        > Введите ваш Email</h1>
+        > Email</h1>
         
-        <my-input
-            @blur="v$.email.$touch()"
-            v-model="state.userData.email"
-            type="email"
-            style="margin-top: 7px"
-        />
+        <my-input 
+        @blur="v$.email.$touch()"
+        v-model="state.userData.email"
+        type="email"
+        style="margin-top: 7px"
+        ></my-input>
+        
         <span class="span__error" v-if="v$.email.$error"
             style="color:red"
             >
@@ -43,27 +44,27 @@
         
         <h1 class="registr__header"
             style="margin-top: 21px;"
-        > Введите ваш пароль</h1>
+        > Пароль</h1>
 
-        <my-input
+        <input
             class="input__password"
             @blur="v$.password.$touch()"
             v-model="state.userData.password"
             style="margin-top: 7px"
             type="password"
         />
+
         <span  class="span__error" v-if="v$.password.$error"
         style="color:red"
         >
             {{ 'Пожалуйста, придумайте пароль (минимум 6 символо)'}}
         </span>
 
-
         <h1 class="registr__header"
          style="margin-top: 21px;"
         > Введите ваш пароль ещё раз</h1>
 
-        <my-input
+        <input
             class="input__password"
             @blur="v$.confirm.$touch()"
             v-model="state.userData.confirm"
@@ -80,11 +81,11 @@
 
         <div class="no_account">
 
-            <h3 class="no_acc">
+            <h1 class="registr__header">
                 Уже есть аккаунт?
-            </h3>
+            </h1>
 
-            <h3 class="create_acc"
+            <h3 class="registr__header"
             style="margin-left: 40px;cursor: pointer;"
             >
                 Войти
@@ -164,7 +165,7 @@ export default {
             this.setUserData(data)
             this.userRegistration(data)
             this.$router.push('/')
-        }
+        },
     }
 }
 </script>
@@ -185,7 +186,6 @@ export default {
 .registr__header {
     width: 373px;
     left: calc(50% - 137px/2 - 119.5px);
-
     font-family: 'Advent Pro';
     font-style: normal;
     font-weight: 700;
@@ -204,7 +204,7 @@ export default {
 }
 
 .input__password {
-    width: 375px;
+    width: 80%;
     height: 49px;
     background: transparent;
     outline: none;

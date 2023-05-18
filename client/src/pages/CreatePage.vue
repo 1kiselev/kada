@@ -163,7 +163,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url("/img/fon.png");
+    background-image: url("/img/fon-create.png");
     background-size: 100% 100%;
 
 
